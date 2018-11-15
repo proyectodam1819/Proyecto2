@@ -29,7 +29,13 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name="org.izv.aad.proyecto.Activities.Login" />
+        <activity android:name="org.izv.aad.proyecto.Activities.Login" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name="org.izv.aad.proyecto.Activities.ManageBooks" />
         <activity
             android:name="org.izv.aad.proyecto.Activities.ShowBook"
@@ -37,13 +43,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="org.izv.aad.proyecto.Activities.Help" />
         <activity android:name="org.izv.aad.proyecto.Activities.CreateUser" />
-        <activity android:name="org.izv.aad.proyecto.Logup" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="org.izv.aad.proyecto.Logup" />
         <activity
             android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
             android:excludeFromRecents="true"

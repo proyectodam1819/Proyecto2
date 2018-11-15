@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-35:12
-INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-35:12
-INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-35:12
-INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-35:12
+ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-36:12
 MERGED from [com.android.support:design:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/36563a47c3c76bef18c6e821cbc35040/AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/72172bd821bae4e6d3c35240492109d3/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/dam/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/844e0bf2499e424526c3043f207a2b52/AndroidManifest.xml:2:1-11:12
@@ -58,25 +58,27 @@ MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/dam/.gradl
 MERGED from [com.android.support:print:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/1557d0dafb287a86f63f66335249ca53/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/69bb2b20c67b5360cef5eff00bf7ee76/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:interpolator:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/ef4350dfa6d0fae2e10379e66f232d2d/AndroidManifest.xml:17:1-22:12
-INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-35:12
-INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-35:12
-INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-35:12
+INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-36:12
 	package
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:3:5-35
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:4:5-35
 		INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-35:12
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-36:12
 		INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-35:12
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-36:12
 		INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:11-69
 application
-ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:5:5-33:19
+ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:6:5-34:19
 MERGED from [com.android.support:design:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/36563a47c3c76bef18c6e821cbc35040/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/36563a47c3c76bef18c6e821cbc35040/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/dam/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/844e0bf2499e424526c3043f207a2b52/AndroidManifest.xml:9:5-20
@@ -126,63 +128,65 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/dam/.gradle/
 	android:appComponentFactory
 		ADDED from [com.android.support:support-compat:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/e0be1ccbfec168fe71847f40c6715f9c/AndroidManifest.xml:22:18-91
 	android:supportsRtl
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:10:9-35
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:11:9-35
 	android:label
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:8:9-41
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:9:9-41
+	tools:ignore
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:13:9-48
 	android:roundIcon
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:9:9-54
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:10:9-54
 	android:icon
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:7:9-43
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:8:9-43
 	android:allowBackup
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:6:9-35
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:7:9-35
 	android:theme
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:11:9-40
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:12:9-40
 activity#org.izv.aad.proyecto.Activities.Index
-ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:12:9-17:20
+ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:14:9-18:20
 	android:label
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:14:13-45
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:16:13-45
 	android:theme
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:15:13-56
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:17:13-56
 	android:name
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:13:13-45
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:15:13-45
 activity#org.izv.aad.proyecto.Activities.Login
-ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:18:9-54
+ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:19:9-25:20
 	android:name
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:18:19-51
-activity#org.izv.aad.proyecto.Activities.ManageBooks
-ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:19:9-60
-	android:name
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:19:19-57
-activity#org.izv.aad.proyecto.Activities.ShowBook
-ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:20:9-23:59
-	android:label
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:22:13-65
-	android:theme
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:23:13-56
-	android:name
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:21:13-48
-activity#org.izv.aad.proyecto.Activities.Help
-ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:24:9-53
-	android:name
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:24:19-50
-activity#org.izv.aad.proyecto.Activities.CreateUser
-ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:25:9-59
-	android:name
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:25:19-56
-activity#org.izv.aad.proyecto.Logup
-ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:26:9-32:20
-	android:name
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:26:19-40
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:19:19-51
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:27:13-31:29
+ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:20:13-24:29
 action#android.intent.action.MAIN
-ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:28:17-69
+ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:21:17-69
 	android:name
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:28:25-66
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:21:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:30:17-77
+ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:23:17-77
 	android:name
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:30:27-74
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:23:27-74
+activity#org.izv.aad.proyecto.Activities.ManageBooks
+ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:26:9-60
+	android:name
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:26:19-57
+activity#org.izv.aad.proyecto.Activities.ShowBook
+ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:27:9-30:59
+	android:label
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:29:13-65
+	android:theme
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:30:13-56
+	android:name
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:28:13-48
+activity#org.izv.aad.proyecto.Activities.Help
+ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:31:9-53
+	android:name
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:31:19-50
+activity#org.izv.aad.proyecto.Activities.CreateUser
+ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:32:9-59
+	android:name
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:32:19-56
+activity#org.izv.aad.proyecto.Logup
+ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:33:9-52
+	android:name
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:33:19-40
 uses-sdk
 INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml
