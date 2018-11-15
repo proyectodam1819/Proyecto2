@@ -1377,6 +1377,9 @@ layout design_navigation_item_subheader
 layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_password_icon
+layout fragment_logup1
+layout fragment_logup2
+layout logup
 layout mtrl_layout_snackbar
 layout mtrl_layout_snackbar_include
 layout nav_header_index
