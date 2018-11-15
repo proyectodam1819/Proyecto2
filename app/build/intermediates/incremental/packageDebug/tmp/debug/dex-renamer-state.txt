@@ -1,0 +1,4 @@
+#Thu Oct 25 09:57:37 CEST 2018
+base.0=/Users/dam/Desktop/Proyecto/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
