@@ -96,4 +96,30 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+
+    //login and create user
+    <string name="login">Log in</string>
+    <string name="mail">Mail</string>
+    <string name="password">Password</string>
+    <string name="repitePass">Repite password</string>
+    <string name="noAccount">You do not have an account?</string>
+    <string name="signUp">Sign up</string>
+    <string name="forgotPassword">Forgot my password</string>
+    <string name="not_empty">The field can\'t be empty</string>
+    <string name="next">Next</string>
+    <string name="not_equals">The passwords aren\'t equals</string>
+
+
+
+    //create book
+    <string name="title">Title</string>
+    <string name="author">Author</string>
+    <string name="state">State</string>
+    <string name="dateStart">Date Start</string>
+    <string name="dateFinish">Date Finish</string>
+    <string name="summary">Summary</string>
+    <string name="create">Create</string>
+
+    //Logup
+
 </resources>

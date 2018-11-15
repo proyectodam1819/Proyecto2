@@ -2,7 +2,6 @@ package org.izv.aad.proyecto.FireBase;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -64,12 +63,13 @@ public class FirebaseCustom {
         user = getFirebaseAuth().getCurrentUser();
     }
 
-    public static void login(Activity activity, String email, String password){
+    public static void login(Activity activity, String email, String password, final IntefaceFireBase intefaceFireBase){
         Task<AuthResult> task = getFirebaseAuth().signInWithEmailAndPassword(email,password);
         task.addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 setUser();
+                intefaceFireBase.getUserLogin(user);
             }
         });
     }
@@ -171,4 +171,6 @@ public class FirebaseCustom {
         saveItem.put(getRouteAuthor(author.getKey()), null);
         getReference().updateChildren(saveItem);
     }
+
+
 }

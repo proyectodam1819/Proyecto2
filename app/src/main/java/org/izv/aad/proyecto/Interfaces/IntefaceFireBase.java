@@ -1,5 +1,7 @@
 package org.izv.aad.proyecto.Interfaces;
 
+import com.google.firebase.auth.FirebaseUser;
+
 import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
 
@@ -10,5 +12,7 @@ public interface IntefaceFireBase {
     Book getBook(Book book);
 
     Author getAuthor(Author author);
+
+    FirebaseUser getUserLogin(FirebaseUser user);
 
 }

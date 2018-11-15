@@ -23,7 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme.NoActionBar" >
         <activity
             android:name="org.izv.aad.proyecto.Activities.Index"
             android:label="@string/app_name"
@@ -43,7 +43,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="org.izv.aad.proyecto.Activities.Help" />
         <activity android:name="org.izv.aad.proyecto.Activities.CreateUser" />
-        <activity android:name="org.izv.aad.proyecto.Logup" />
+        <activity android:name="org.izv.aad.proyecto.Activities.Logup" />
         <activity
             android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
             android:excludeFromRecents="true"

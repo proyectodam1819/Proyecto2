@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import org.izv.aad.proyecto.Logup;
 import org.izv.aad.proyecto.R;
 
 public class Login extends AppCompatActivity {

@@ -30,7 +30,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.Help" />
         <activity android:name=".Activities.CreateUser" />
-        <activity android:name=".Logup"></activity>
+        <activity android:name=".Activities.Logup"></activity>
     </application>
 
 </manifest>

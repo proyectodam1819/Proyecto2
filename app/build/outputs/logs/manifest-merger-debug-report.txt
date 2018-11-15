@@ -140,7 +140,7 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/dam/.gradle/
 	android:allowBackup
 		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:7:9-35
 	android:theme
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:12:9-40
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:12:9-52
 activity#org.izv.aad.proyecto.Activities.Index
 ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:14:9-18:20
 	android:label
@@ -183,10 +183,10 @@ activity#org.izv.aad.proyecto.Activities.CreateUser
 ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:32:9-59
 	android:name
 		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:32:19-56
-activity#org.izv.aad.proyecto.Logup
-ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:33:9-52
+activity#org.izv.aad.proyecto.Activities.Logup
+ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:33:9-63
 	android:name
-		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:33:19-40
+		ADDED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:33:19-51
 uses-sdk
 INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml
