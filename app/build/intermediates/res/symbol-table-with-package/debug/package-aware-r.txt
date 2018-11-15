@@ -1159,6 +1159,8 @@ id fill_vertical
 id filled
 id fixed
 id forever
+id fragment2
+id fragmento1
 id ghost_view
 id gone
 id group_divider
@@ -1278,6 +1280,7 @@ id textView
 id textView2
 id textView3
 id textView4
+id textView5
 id text_input_password_toggle
 id textinput_counter
 id textinput_error
