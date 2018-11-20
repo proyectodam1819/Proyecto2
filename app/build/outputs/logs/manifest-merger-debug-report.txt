@@ -11,6 +11,7 @@ MERGED from [com.google.firebase:firebase-core:16.0.5] /Users/dam/.gradle/caches
 MERGED from [com.google.firebase:firebase-auth:16.0.5] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/c098f9a82bf8513093ec1ba0d5b98395/AndroidManifest.xml:17:1-42:12
 MERGED from [com.google.firebase:firebase-database:16.0.4] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.4.aar/237bdb31fdebfe2ab310cbe26beabad8/AndroidManifest.xml:15:1-25:12
 MERGED from [com.google.firebase:firebase-storage:16.0.4] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.0.4.aar/4d6c897827075090f048a761f161c82d/AndroidManifest.xml:15:1-26:12
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:17:1-39:12
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/6208507f6eab95b62639c4c80dae323c/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/95a2ee3896f14f4e6e2269976ba6b19a/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:transition:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/c434db08f4290827f57649e99066583c/AndroidManifest.xml:17:1-22:12
@@ -19,6 +20,8 @@ MERGED from [com.google.firebase:firebase-measurement-connector-impl:17.0.3] /Us
 MERGED from [com.google.firebase:firebase-analytics:16.0.5] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.5.aar/98fa51e58d60a7dd3c7ae2fd16d58f1d/AndroidManifest.xml:17:1-55:12
 MERGED from [com.google.android.gms:play-services-flags:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-flags-16.0.1.aar/46bed0824b0cac208a0f1371dcfa2d85/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-auth-interop:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/3f4f593eeae757c581b3646cea1ce4d9/AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-16.0.0.aar/ab56240614fad1e6b4d0b542be74b7c8/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-16.0.0.aar/b52a889f43fb743e6c737b21c8ef5c37/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-measurement-api:16.0.3] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-measurement-api-16.0.3.aar/1c7a4e5d5e9a6074bfc38562ee756be7/AndroidManifest.xml:17:1-25:12
 MERGED from [com.google.firebase:firebase-analytics-impl:16.2.3] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.3.aar/5c4a91ab97cf02ce3700d7067cdc0eb9/AndroidManifest.xml:17:1-40:12
 MERGED from [com.google.firebase:firebase-iid:17.0.3] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.3.aar/db5255f41d1e298179e942aee991faef/AndroidManifest.xml:17:1-59:12
@@ -87,6 +90,8 @@ MERGED from [com.google.firebase:firebase-core:16.0.5] /Users/dam/.gradle/caches
 MERGED from [com.google.firebase:firebase-core:16.0.5] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-core-16.0.5.aar/d274618d9b7fdddc21cbc6ecf0b42dbb/AndroidManifest.xml:7:5-20
 MERGED from [com.google.firebase:firebase-auth:16.0.5] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/c098f9a82bf8513093ec1ba0d5b98395/AndroidManifest.xml:23:5-40:19
 MERGED from [com.google.firebase:firebase-auth:16.0.5] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/c098f9a82bf8513093ec1ba0d5b98395/AndroidManifest.xml:23:5-40:19
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:22:5-37:19
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:22:5-37:19
 MERGED from [com.google.firebase:firebase-measurement-connector-impl:17.0.3] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.3.aar/fe8a9638f9ba91bc7adbb03933e3257c/AndroidManifest.xml:26:5-32:19
 MERGED from [com.google.firebase:firebase-measurement-connector-impl:17.0.3] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.3.aar/fe8a9638f9ba91bc7adbb03933e3257c/AndroidManifest.xml:26:5-32:19
 MERGED from [com.google.firebase:firebase-analytics:16.0.5] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.5.aar/98fa51e58d60a7dd3c7ae2fd16d58f1d/AndroidManifest.xml:28:5-53:19
@@ -205,6 +210,8 @@ MERGED from [com.google.firebase:firebase-database:16.0.4] /Users/dam/.gradle/ca
 MERGED from [com.google.firebase:firebase-database:16.0.4] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.4.aar/237bdb31fdebfe2ab310cbe26beabad8/AndroidManifest.xml:18:5-20:41
 MERGED from [com.google.firebase:firebase-storage:16.0.4] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.0.4.aar/4d6c897827075090f048a761f161c82d/AndroidManifest.xml:19:5-21:41
 MERGED from [com.google.firebase:firebase-storage:16.0.4] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.0.4.aar/4d6c897827075090f048a761f161c82d/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/6208507f6eab95b62639c4c80dae323c/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/6208507f6eab95b62639c4c80dae323c/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/95a2ee3896f14f4e6e2269976ba6b19a/AndroidManifest.xml:20:5-44
@@ -221,6 +228,10 @@ MERGED from [com.google.android.gms:play-services-flags:16.0.1] /Users/dam/.grad
 MERGED from [com.google.android.gms:play-services-flags:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-flags-16.0.1.aar/46bed0824b0cac208a0f1371dcfa2d85/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-auth-interop:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/3f4f593eeae757c581b3646cea1ce4d9/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-auth-interop:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-auth-interop-16.0.1.aar/3f4f593eeae757c581b3646cea1ce4d9/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-16.0.0.aar/ab56240614fad1e6b4d0b542be74b7c8/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-api-phone-16.0.0.aar/ab56240614fad1e6b4d0b542be74b7c8/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-16.0.0.aar/b52a889f43fb743e6c737b21c8ef5c37/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-base-16.0.0.aar/b52a889f43fb743e6c737b21c8ef5c37/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-measurement-api:16.0.3] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-measurement-api-16.0.3.aar/1c7a4e5d5e9a6074bfc38562ee756be7/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-measurement-api:16.0.3] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-measurement-api-16.0.3.aar/1c7a4e5d5e9a6074bfc38562ee756be7/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-analytics-impl:16.2.3] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-analytics-impl-16.2.3.aar/5c4a91ab97cf02ce3700d7067cdc0eb9/AndroidManifest.xml:20:5-44
@@ -371,6 +382,24 @@ MERGED from [com.google.firebase:firebase-iid:17.0.3] /Users/dam/.gradle/caches/
 MERGED from [com.google.firebase:firebase-iid:17.0.3] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-iid-17.0.3.aar/db5255f41d1e298179e942aee991faef/AndroidManifest.xml:23:5-67
 	android:name
 		ADDED from [com.google.firebase:firebase-database:16.0.4] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.4.aar/237bdb31fdebfe2ab310cbe26beabad8/AndroidManifest.xml:23:22-64
+activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
+ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:23:9-27:75
+	android:excludeFromRecents
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:25:13-46
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:26:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:27:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:24:13-93
+service#com.google.android.gms.auth.api.signin.RevocationBoundService
+ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:33:9-36:110
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:35:13-36
+	android:permission
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:36:13-107
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:34:13-89
 uses-permission#android.permission.WAKE_LOCK
 ADDED from [com.google.firebase:firebase-measurement-connector-impl:17.0.3] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.3.aar/fe8a9638f9ba91bc7adbb03933e3257c/AndroidManifest.xml:24:5-68
 MERGED from [com.google.firebase:firebase-analytics:16.0.5] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.5.aar/98fa51e58d60a7dd3c7ae2fd16d58f1d/AndroidManifest.xml:25:5-68
