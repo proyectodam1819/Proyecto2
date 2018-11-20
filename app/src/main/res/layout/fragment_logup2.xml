@@ -34,7 +34,8 @@
             android:id="@+id/create_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/password" />
+            android:hint="@string/password"
+            android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
     <ImageView
@@ -64,7 +65,8 @@
             android:id="@+id/create_repitePassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/repitePass" />
+            android:hint="@string/repitePass"
+            android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
 

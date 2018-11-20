@@ -3,6 +3,7 @@ package org.izv.aad.proyecto.Activities;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,7 +20,7 @@ import org.izv.aad.proyecto.R;
 
 public class Logup extends AppCompatActivity {
 
-    private TextView create_mail,create_password, create_repitePassword;
+    private TextView create_mail,create_password, create_repitePassword,msg_error;
     private TextInputLayout create_mailLayout, create_passwordLayout, create_repitePasswordLayout;
     private FragmentLogup1 fragmentLogup1;
     private FragmentLogup2 fragmentLogup2;
@@ -34,7 +35,7 @@ public class Logup extends AppCompatActivity {
 
 
         // Actions from buttons
-        changeFragment();
+        changeToFragment2();
         register();
     }
 
@@ -44,6 +45,7 @@ public class Logup extends AppCompatActivity {
         create_mailLayout = findViewById(R.id.create_mailLayout);
         create_passwordLayout = findViewById(R.id.create_passwordLayout);
         create_repitePasswordLayout = findViewById(R.id.create_repitePasswordLayout);
+        msg_error = findViewById(R.id.msg_error);
         create_mail = create_mailLayout.getEditText();
         create_password = create_passwordLayout.getEditText();
         create_repitePassword = create_repitePasswordLayout.getEditText();
@@ -53,11 +55,16 @@ public class Logup extends AppCompatActivity {
 
         intefaceFireBase = new IntefaceFireBase() {
             @Override
-            public void isCorrectlyLogUp(boolean isSuccessful) {
+            public void isCorrectlyLogUp(boolean isSuccessful, String error) {
                 if(isSuccessful){
-
+                    Log.v("XYZ", "correcto: " + error);
+                    endIntent();
                 }else{
-
+                    if(error.equals(getString(R.string.error_email_repeat))){
+                        msg_error.setText(getString(R.string.msg_email_repeat));
+                        msg_error.setVisibility(View.VISIBLE);
+                        changeToFragment1();
+                    }
                 }
             }
 
@@ -72,9 +79,10 @@ public class Logup extends AppCompatActivity {
             }
 
             @Override
-            public FirebaseUser getUserLogin() {
+            public FirebaseUser getUserLogin(FirebaseUser user) {
                 return null;
             }
+
         };
 
         fragmentLogup1 = (FragmentLogup1)getSupportFragmentManager().findFragmentById(R.id.fragmento1);
@@ -83,7 +91,7 @@ public class Logup extends AppCompatActivity {
         fragmentLogup2.getView().setVisibility(View.GONE);
     }
 
-    private void changeFragment() {
+    private void changeToFragment2() {
         create_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +104,11 @@ public class Logup extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void changeToFragment1(){
+        fragmentLogup1.getView().setVisibility(View.VISIBLE);
+        fragmentLogup2.getView().setVisibility(View.GONE);
     }
 
     private void register(){
@@ -118,6 +131,10 @@ public class Logup extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void endIntent(){
+        finish();
     }
 
 

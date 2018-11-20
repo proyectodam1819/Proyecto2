@@ -7,7 +7,7 @@ import org.izv.aad.proyecto.Objects.Book;
 
 public interface IntefaceFireBase {
 
-    void isCorrectlyLogUp(boolean isSuccessful);
+    void isCorrectlyLogUp(boolean isSuccessful, String error);
 
     Book getBook(Book book);
 

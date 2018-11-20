@@ -84,8 +84,12 @@ public class FirebaseCustom {
         task.addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                intefaceFireBase.isCorrectlyLogUp(task.isSuccessful());
-
+                Exception error = task.getException();
+                String mensajeError = "";
+                if(error != null){
+                    mensajeError = error.toString();
+                }
+                intefaceFireBase.isCorrectlyLogUp(task.isSuccessful(), mensajeError);
             }
         });
     }
