@@ -109,7 +109,11 @@
     <string name="next">Next</string>
     <string name="not_equals">The passwords aren\'t equals</string>
 
-
+    //login
+        //No existe el email
+    <string name="error_login_email">There is no user record corresponding to this identifier. The user may have been deleted.</string>
+        //Clave incorrecta
+    <string name="error_login_clave">The password is invalid or the user does not have a password.</string>
 
     //create book
     <string name="title">Title</string>

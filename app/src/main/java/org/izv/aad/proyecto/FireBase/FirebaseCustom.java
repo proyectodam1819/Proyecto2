@@ -69,7 +69,12 @@ public class FirebaseCustom {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 setUser();
-                interfaceFireBase.getUserLogin(user);
+                Exception error = task.getException();
+                String mensajeError = "";
+                if(error != null){
+                    mensajeError = error.toString();
+                }
+                interfaceFireBase.getUserLogin(user, mensajeError);
             }
         });
     }

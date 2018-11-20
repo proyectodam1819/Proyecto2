@@ -1,8 +1,8 @@
 package org.izv.aad.proyecto.Activities;
 
+import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -57,7 +57,6 @@ public class Logup extends AppCompatActivity {
             @Override
             public void isCorrectlyLogUp(boolean isSuccessful, String error) {
                 if(isSuccessful){
-                    Log.v("XYZ", "correcto: " + error);
                     endIntent();
                 }else{
                     if(error.equals(getString(R.string.error_email_repeat))){
@@ -79,7 +78,7 @@ public class Logup extends AppCompatActivity {
             }
 
             @Override
-            public FirebaseUser getUserLogin(FirebaseUser user) {
+            public FirebaseUser getUserLogin(FirebaseUser user, String error) {
                 return null;
             }
 

@@ -1133,6 +1133,7 @@ id content
 id contentPanel
 id coordinator
 id create_icoMail
+id create_icoPassword
 id create_icoPassword2
 id create_icoRepitePassword
 id create_logo
@@ -1201,6 +1202,11 @@ id line1
 id line3
 id listMode
 id list_item
+id login_btLogin
+id login_linkRegistrar
+id login_logo
+id login_mail
+id login_password
 id masked
 id media_actions
 id message
@@ -1292,9 +1298,9 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textView
-id textView2
 id textView3
 id textView4
+id textView5
 id text_input_password_toggle
 id textinput_counter
 id textinput_error
