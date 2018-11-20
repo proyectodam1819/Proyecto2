@@ -13,10 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import org.izv.aad.proyecto.FireBase.FirebaseCustom;
-import org.izv.aad.proyecto.Interfaces.IntefaceFireBase;
-import org.izv.aad.proyecto.Objects.Author;
-import org.izv.aad.proyecto.Objects.Book;
 import org.izv.aad.proyecto.R;
 
 public class Index extends AppCompatActivity

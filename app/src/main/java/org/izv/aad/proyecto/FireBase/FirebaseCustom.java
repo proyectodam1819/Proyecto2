@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import org.izv.aad.proyecto.Interfaces.IntefaceFireBase;
+import org.izv.aad.proyecto.Interfaces.InterfaceFireBase;
 import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
 
@@ -63,23 +63,23 @@ public class FirebaseCustom {
         user = getFirebaseAuth().getCurrentUser();
     }
 
-    public static void login(Activity activity, String email, String password, final IntefaceFireBase intefaceFireBase){
+    public static void login(Activity activity, String email, String password, final InterfaceFireBase interfaceFireBase){
         Task<AuthResult> task = getFirebaseAuth().signInWithEmailAndPassword(email,password);
         task.addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 setUser();
-                intefaceFireBase.getUserLogin(user);
+                interfaceFireBase.getUserLogin(user);
             }
         });
     }
 
     /*
-    * Hace falta instanciar la interfaz IntefaceFireBase en donde se llame al método log up
+    * Hace falta instanciar la interfaz InterfaceFireBase en donde se llame al método log up
     * Al instanciarla se hará cargo en el método isCorrectlyLogUp de mostrar el error o
     * el que se haya hecho bien
     * */
-    public static void logup(Activity activity, String email, String password, final IntefaceFireBase intefaceFireBase){
+    public static void logup(Activity activity, String email, String password, final InterfaceFireBase interfaceFireBase){
         Task<AuthResult> task = getFirebaseAuth().createUserWithEmailAndPassword(email,password);
         task.addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
             @Override
@@ -89,7 +89,7 @@ public class FirebaseCustom {
                 if(error != null){
                     mensajeError = error.toString();
                 }
-                intefaceFireBase.isCorrectlyLogUp(task.isSuccessful(), mensajeError);
+                interfaceFireBase.isCorrectlyLogUp(task.isSuccessful(), mensajeError);
             }
         });
     }
@@ -112,7 +112,7 @@ public class FirebaseCustom {
         return author;
     }
 
-    public static void getBook(Book book, final IntefaceFireBase intefaceFireBase){
+    public static void getBook(Book book, final InterfaceFireBase interfaceFireBase){
         Query query = getReference().child(getRouteBook(book.getKey()));
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -120,7 +120,7 @@ public class FirebaseCustom {
                 Map <String, Object> items = (Map<String, Object>) dataSnapshot.getValue();
                 for(Map.Entry<String,Object> entry: items.entrySet()){
                     Map mapItem = (Map) entry.getValue();
-                    intefaceFireBase.getBook(Book.fromMap(mapItem));
+                    interfaceFireBase.getBook(Book.fromMap(mapItem));
                 }
             }
 
@@ -131,7 +131,7 @@ public class FirebaseCustom {
         });
     }
 
-    public static void getAuthor(Author author, final IntefaceFireBase intefaceFireBase){
+    public static void getAuthor(Author author, final InterfaceFireBase interfaceFireBase){
         Query query = getReference().child(getRouteAuthor(author.getKey()));
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -139,7 +139,7 @@ public class FirebaseCustom {
                 Map <String, Object> items = (Map<String, Object>) dataSnapshot.getValue();
                 for(Map.Entry<String,Object> entry: items.entrySet()){
                     Map mapItem = (Map) entry.getValue();
-                    intefaceFireBase.getAuthor(Author.fromMap(mapItem));
+                    interfaceFireBase.getAuthor(Author.fromMap(mapItem));
                 }
             }
 

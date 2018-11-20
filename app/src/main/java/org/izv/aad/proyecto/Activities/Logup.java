@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 import org.izv.aad.proyecto.FireBase.FirebaseCustom;
 import org.izv.aad.proyecto.Fragments.FragmentLogup1;
 import org.izv.aad.proyecto.Fragments.FragmentLogup2;
-import org.izv.aad.proyecto.Interfaces.IntefaceFireBase;
+import org.izv.aad.proyecto.Interfaces.InterfaceFireBase;
 import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
 import org.izv.aad.proyecto.R;
@@ -25,7 +25,7 @@ public class Logup extends AppCompatActivity {
     private FragmentLogup1 fragmentLogup1;
     private FragmentLogup2 fragmentLogup2;
     private Button create_next,create_logup;
-    private IntefaceFireBase intefaceFireBase;
+    private InterfaceFireBase interfaceFireBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class Logup extends AppCompatActivity {
         create_next = findViewById(R.id.create_next);
         create_logup = findViewById(R.id.create_logup);
 
-        intefaceFireBase = new IntefaceFireBase() {
+        interfaceFireBase = new InterfaceFireBase() {
             @Override
             public void isCorrectlyLogUp(boolean isSuccessful, String error) {
                 if(isSuccessful){
@@ -127,7 +127,7 @@ public class Logup extends AppCompatActivity {
                 }else if(!create_repitePassword.getText().toString().equals(create_password.getText().toString())){
                     create_repitePasswordLayout.setError(getString(R.string.not_equals));
                 }else{
-                    FirebaseCustom.logup(Logup.this, create_mail.getText().toString(), create_password.getText().toString(), intefaceFireBase);
+                    FirebaseCustom.logup(Logup.this, create_mail.getText().toString(), create_password.getText().toString(), interfaceFireBase);
                 }
             }
         });

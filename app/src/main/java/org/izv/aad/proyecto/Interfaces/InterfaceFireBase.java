@@ -5,7 +5,7 @@ import com.google.firebase.auth.FirebaseUser;
 import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
 
-public interface IntefaceFireBase {
+public interface InterfaceFireBase {
 
     void isCorrectlyLogUp(boolean isSuccessful, String error);
 
