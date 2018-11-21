@@ -1500,6 +1500,8 @@ string dateFinish
 string dateStart
 string default_web_client_id
 string error_email_repeat
+string error_login_clave
+string error_login_email
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string firebase_database_url

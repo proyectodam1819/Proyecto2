@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.izv.aad.proyecto.Activities.Index;
 import org.izv.aad.proyecto.Interfaces.OnItemClickListener;
 import org.izv.aad.proyecto.Objects.Book;
 
@@ -15,7 +16,7 @@ public class AdapterIndex extends RecyclerView.Adapter <AdapterIndex.MyViewHolde
     private List<Book> books;
     private OnItemClickListener listener;
 
-    public AdapterIndex(List<Book> books, OnItemClickListener listener) {
+    public AdapterIndex(Index index, List<Book> books, OnItemClickListener listener) {
         this.books = books;
         this.listener = listener;
     }
