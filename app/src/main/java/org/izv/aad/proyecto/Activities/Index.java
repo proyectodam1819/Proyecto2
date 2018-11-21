@@ -143,10 +143,14 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     @SuppressLint("StaticFieldLeak")
     private void getBooks(){
         AsyncTask task = new AsyncTask(){
-
             @Override
             protected List<Book> doInBackground(Object[] objects) {
                 return manager.getAllBooks(null);
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                super.onPostExecute(o);
             }
 
             @Override
