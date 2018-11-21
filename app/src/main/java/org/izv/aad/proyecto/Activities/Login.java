@@ -34,7 +34,6 @@ public class Login extends AppCompatActivity {
     private ImageView createicoPasswordIV;
     private Button loginbtLogin;
     private TextView textView5;
-    private TextView textView2;
     private TextView loginlinkRegistrarTV;
     private TextView textViewError;
     private InterfaceFireBase interfaceFireBase;
@@ -45,35 +44,35 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();
-
         initLogUp();
+        setClickLogin();
+
     }
 
     private void init(){
         tvLogup = findViewById(R.id.tvLogup);
-        loginlinkRegistrarTV = (TextView) findViewById(R.id.login_linkRegistrar);
-        textView2 = (TextView) findViewById(R.id.tvLogup);
-        textView5 = (TextView) findViewById(R.id.textView5);
-        loginbtLogin = (Button) findViewById(R.id.login_btLogin);
-        createicoPasswordIV = (ImageView) findViewById(R.id.create_icoPassword);
-        createpasswordLayout = (TextInputLayout) findViewById(R.id.create_passwordLayout);
-        loginpasswordET = (TextInputEditText) findViewById(R.id.login_password);
-        createicoMail = (ImageView) findViewById(R.id.create_icoMail);
-        createmailLayout = (TextInputLayout) findViewById(R.id.create_mailLayout);
-        loginmailET = (TextInputEditText) findViewById(R.id.login_mail);
-        loginlogo = (ImageView) findViewById(R.id.login_logo);
-        textViewError=(TextView) findViewById(R.id.textView);
+        loginlinkRegistrarTV = findViewById(R.id.login_linkRegistrar);
+        textView5 = findViewById(R.id.textView5);
+        loginbtLogin = findViewById(R.id.login_btLogin);
+        createicoPasswordIV = findViewById(R.id.create_icoPassword);
+        createpasswordLayout = findViewById(R.id.create_passwordLayout);
+        loginpasswordET = findViewById(R.id.login_password);
+        createicoMail = findViewById(R.id.create_icoMail);
+        createmailLayout = findViewById(R.id.create_mailLayout);
+        loginmailET = findViewById(R.id.login_mail);
+        loginlogo = findViewById(R.id.login_logo);
+        textViewError=findViewById(R.id.textView);
         interfaceFireBase = managerCallBack();
     }
-    public void botonLoginClick(View v) {
 
+    public void botonLoginClick() {
         if(loginmailET.getText().toString().compareTo("")==0){
-            createmailLayout.setError("introduzca un correo");
+            createmailLayout.setError(getString(R.string.msg_no_text_in_email));
             createmailLayout.setErrorEnabled(true);
             textViewError.setVisibility(View.GONE);
         }
         if(loginpasswordET.getText().toString().compareTo("")==0){
-            createpasswordLayout.setError("introduzca un correo");
+            createpasswordLayout.setError(getString(R.string.msg_no_text_in_contraseña));
             createpasswordLayout.setErrorEnabled(true);
             textViewError.setVisibility(View.GONE);
         }
@@ -82,13 +81,7 @@ public class Login extends AppCompatActivity {
             createmailLayout.setErrorEnabled(false);
             createpasswordLayout.setErrorEnabled(false);
             FirebaseCustom.login(this, loginmailET.getText().toString(), loginpasswordET.getText().toString(), interfaceFireBase);
-            if (FirebaseCustom.getUser() == null) {
-                textViewError.setVisibility(View.VISIBLE);
-                textViewError.setTextColor(Color.RED);
-            } else {
-                textViewError.setVisibility(View.GONE);
 
-            }
         }
     }
 
@@ -98,6 +91,15 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Login.this, Logup.class);
                 startActivity(intent);
+            }
+        });
+    }
+
+    private void setClickLogin(){
+        loginbtLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                botonLoginClick();
             }
         });
     }
@@ -120,18 +122,26 @@ public class Login extends AppCompatActivity {
             }
 
             @Override
-            public FirebaseUser getUserLogin(FirebaseUser user, String error) {
-                Log.v("XYZ", user.toString()+": " + error);
+            public void getUserLogin(FirebaseUser user, String error) {
                 if(error.equals(getString(R.string.error_login_email))){
-                    //Mostrar mensaje
+                    createmailLayout.setError(getString(R.string.msg_login_email));
+                    createmailLayout.setErrorEnabled(true);
+                    textViewError.setVisibility(View.GONE);
                 }else if(error.equals(getString(R.string.error_login_clave))){
-                    //Mostrar mensaje
+                    createpasswordLayout.setError(getString(R.string.msg_login_clave));
+                    createpasswordLayout.setErrorEnabled(true);
+                    textViewError.setVisibility(View.GONE);
+                }else if(error.equals(getString(R.string.error_login_no_email))) {
+                    createmailLayout.setError(getString(R.string.msg_login_no_email));
+                    createmailLayout.setErrorEnabled(true);
+                    textViewError.setVisibility(View.GONE);
                 }else{
-                    //Devolver usuario
+                    Intent i = new Intent(Login.this, Index.class);
+                    startActivity(i);
                 }
-
-                return null;
             }
+
+
         };
     }
 }

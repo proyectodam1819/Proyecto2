@@ -13,6 +13,6 @@ public interface InterfaceFireBase {
 
     Author getAuthor(Author author);
 
-    FirebaseUser getUserLogin(FirebaseUser user, String error);
+    void getUserLogin(FirebaseUser user, String error);
 
 }

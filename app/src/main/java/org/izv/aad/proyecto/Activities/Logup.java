@@ -78,8 +78,8 @@ public class Logup extends AppCompatActivity {
             }
 
             @Override
-            public FirebaseUser getUserLogin(FirebaseUser user, String error) {
-                return null;
+            public void getUserLogin(FirebaseUser user, String error) {
+
             }
 
         };

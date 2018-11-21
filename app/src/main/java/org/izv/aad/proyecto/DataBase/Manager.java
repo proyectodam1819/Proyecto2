@@ -8,6 +8,8 @@ import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Manager {
 
@@ -83,11 +85,11 @@ public class Manager {
      ********************   CURSOR  ******************
      *************************************************/
 
-    private Cursor getCursorAutor(){
-        return getCursorAutor(null, null);
+    private Cursor getCursorAuthor(){
+        return getCursorAuthor(null, null);
     }
 
-    private Cursor getCursorAutor(String condicion, String[] argumentos){
+    private Cursor getCursorAuthor(String condicion, String[] argumentos){
         return bdAutor.query(
                 Contract.AuthorTable.TABLE_NAME,
                 null,
@@ -100,11 +102,11 @@ public class Manager {
         );
     }
 
-    private Cursor getCursorLibro(){
-        return getCursorLibro(null, null);
+    private Cursor getCursorBook(){
+        return getCursorBook(null, null);
     }
 
-    private Cursor getCursorLibro(String condicion, String[] argumentos){
+    private Cursor getCursorBook(String condicion, String[] argumentos){
         return bdAutor.query(
                 Contract.BookTable.TABLE_NAME,
                 null,
@@ -121,7 +123,7 @@ public class Manager {
      *******************   GET_ROW  ******************
      *************************************************/
 
-    private Book getRowLibro(Cursor cursor){
+    private Book getRowBook(Cursor cursor){
         Book book = new Book();
 
         int posId = cursor.getColumnIndex(Contract.BookTable._ID);
@@ -164,5 +166,39 @@ public class Manager {
         author.setKey(cursor.getString(posKey));
 
         return author;
+    }
+
+    /*************************************************
+     ********************   SELECT  ******************
+     *************************************************/
+
+    public List<Book> getAllBooks(String condicion){
+        List<Book> books = new ArrayList<>();
+        Cursor cursor = getCursorBook(condicion, null);
+        if(condicion == null){
+            cursor = getCursorBook();
+        }
+        Book book;
+
+        while(cursor.moveToNext()){
+            book = getRowBook(cursor);
+            books.add(book);
+        }
+        return books;
+    }
+
+    public List<Author> getAllAuthor(String condicion){
+        List<Author> authors = new ArrayList<>();
+        Cursor cursor = getCursorAuthor(condicion, null);
+        if(condicion == null){
+            cursor = getCursorAuthor();
+        }
+        Author author;
+
+        while(cursor.moveToNext()){
+            author = getRowAutor(cursor);
+            authors.add(author);
+        }
+        return authors;
     }
 }

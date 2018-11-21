@@ -102,8 +102,7 @@
     <string name="mail">Mail</string>
     <string name="password">Password</string>
     <string name="repitePass">Repite password</string>
-    <string name="noAccount">You do not have an account?</string>
-    <string name="signUp">Sign up</string>
+    <string name="noAccount">You do not have an account? Sign up</string>
     <string name="forgotPassword">Forgot my password</string>
     <string name="not_empty">The field can\'t be empty</string>
     <string name="next">Next</string>
@@ -111,9 +110,17 @@
 
     //login
         //No existe el email
-    <string name="error_login_email">There is no user record corresponding to this identifier. The user may have been deleted.</string>
+    <string name="error_login_email">com.google.firebase.auth.FirebaseAuthInvalidUserException: There is no user record corresponding to this identifier. The user may have been deleted.</string>
+    <string name="msg_login_email">wrong email account</string>
         //Clave incorrecta
-    <string name="error_login_clave">The password is invalid or the user does not have a password.</string>
+    <string name="error_login_clave">com.google.firebase.auth.FirebaseAuthInvalidCredentialsException: The password is invalid or the user does not have a password.</string>
+    <string name="msg_login_clave">wrong password</string>
+        //No formato email
+    <string name="error_login_no_email">com.google.firebase.auth.FirebaseAuthInvalidCredentialsException: The email address is badly formatted.</string>
+    <string name="msg_login_no_email">wrong email format</string>
+        //errores editText
+    <string name="msg_no_text_in_email">write an email</string>
+    <string name="msg_no_text_in_contraseña">write a password</string>
 
     //create book
     <string name="title">Title</string>

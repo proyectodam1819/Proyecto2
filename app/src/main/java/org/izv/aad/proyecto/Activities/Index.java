@@ -1,6 +1,8 @@
 package org.izv.aad.proyecto.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import org.izv.aad.proyecto.Adapters.AdapterIndex;
+import org.izv.aad.proyecto.DataBase.Manager;
 import org.izv.aad.proyecto.Interfaces.OnItemClickListener;
 import org.izv.aad.proyecto.Objects.Book;
 import org.izv.aad.proyecto.R;
@@ -27,6 +30,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     Toolbar toolbar;
     RecyclerView recyclerBooks;
     List<Book> books;
+    Manager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         initFloatingButton();
         initNavigarionDrawer();
         initRecycler();
+        manager = new Manager(this);
     }
 
     private void initFloatingButton(){
@@ -88,12 +93,8 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -131,13 +132,29 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerBooks.setLayoutManager(mLayoutManager);
         AdapterIndex adaptador = new AdapterIndex(this, books, new OnItemClickListener() {
-
             @Override
             public void onBookClickListener(Book book) {
                 //Cuando se haga click hará algo aquí
             }
         });
         recyclerBooks.setAdapter(adaptador);
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void getBooks(){
+        AsyncTask task = new AsyncTask(){
+
+            @Override
+            protected List<Book> doInBackground(Object[] objects) {
+                return manager.getAllBooks(null);
+            }
+
+            @Override
+            protected void onPostExecute(List<Book> booksGet) {
+                books = booksGet;
+            }
+        };
+        books = manager.getAllBooks(null);
     }
 
 }
