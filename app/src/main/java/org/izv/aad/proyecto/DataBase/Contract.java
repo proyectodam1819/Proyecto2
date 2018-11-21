@@ -20,7 +20,7 @@ public class Contract {
                     BookTable.COLUMN_START_DATE + " text," +
                     BookTable.COLUMN_END_DATE + " text," +
                     BookTable.COLUMN_KEY + " text unique," +
-                    "FOREIGN KEY("+ AuthorTable.TABLE_NAME+") REFERENCES artist("+ AuthorTable._ID+") )";
+                    "FOREIGN KEY("+ BookTable.COLUMN_ID_AUTHOR +") REFERENCES "+ AuthorTable.COLUMN_NAME +"("+ AuthorTable._ID+") )";
 
 
     private static final String SQL_DELETE_TABLE_BOOK =

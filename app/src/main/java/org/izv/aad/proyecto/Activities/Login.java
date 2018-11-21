@@ -1,5 +1,6 @@
 package org.izv.aad.proyecto.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.TextInputEditText;
@@ -34,9 +35,9 @@ public class Login extends AppCompatActivity {
     private ImageView createicoPasswordIV;
     private Button loginbtLogin;
     private TextView textView5;
-    private TextView loginlinkRegistrarTV;
     private TextView textViewError;
     private InterfaceFireBase interfaceFireBase;
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -51,7 +52,6 @@ public class Login extends AppCompatActivity {
 
     private void init(){
         tvLogup = findViewById(R.id.tvLogup);
-        loginlinkRegistrarTV = findViewById(R.id.login_linkRegistrar);
         textView5 = findViewById(R.id.textView5);
         loginbtLogin = findViewById(R.id.login_btLogin);
         createicoPasswordIV = findViewById(R.id.create_icoPassword);
@@ -66,20 +66,26 @@ public class Login extends AppCompatActivity {
     }
 
     public void botonLoginClick() {
-        if(loginmailET.getText().toString().compareTo("")==0){
+        if(loginmailET.getText().toString().equals("")){
             createmailLayout.setError(getString(R.string.msg_no_text_in_email));
             createmailLayout.setErrorEnabled(true);
             textViewError.setVisibility(View.GONE);
         }
-        if(loginpasswordET.getText().toString().compareTo("")==0){
+        if(loginpasswordET.getText().toString().equals("")){
             createpasswordLayout.setError(getString(R.string.msg_no_text_in_contraseña));
             createpasswordLayout.setErrorEnabled(true);
             textViewError.setVisibility(View.GONE);
         }
 
-        if(loginpasswordET.getText().toString().compareTo("")!=0 && loginmailET.getText().toString().compareTo("")!=0) {
+        if(!loginpasswordET.getText().toString().equals("") && !loginmailET.getText().toString().equals("")) {
             createmailLayout.setErrorEnabled(false);
             createpasswordLayout.setErrorEnabled(false);
+
+            progressDialog= new ProgressDialog(this);
+            progressDialog.setMessage(getString(R.string.msg_loading));
+            //progressDialog.setIcon(R.drawable.ic_android_black_24dp);
+            progressDialog.show();
+
             FirebaseCustom.login(this, loginmailET.getText().toString(), loginpasswordET.getText().toString(), interfaceFireBase);
 
         }
@@ -123,6 +129,7 @@ public class Login extends AppCompatActivity {
 
             @Override
             public void getUserLogin(FirebaseUser user, String error) {
+                progressDialog.dismiss();
                 if(error.equals(getString(R.string.error_login_email))){
                     createmailLayout.setError(getString(R.string.msg_login_email));
                     createmailLayout.setErrorEnabled(true);

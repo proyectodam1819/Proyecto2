@@ -15,18 +15,18 @@ public class Manager {
 
     private AuthorHelper authorHelper;
     private BookHelper bookHelper;
-    private SQLiteDatabase bdLibro, bdAutor;
+    private SQLiteDatabase bdBook, bdAuthor;
 
     public Manager(Context context){
         this.authorHelper = new AuthorHelper(context);
         this.bookHelper = new BookHelper(context);
-        bdAutor = authorHelper.getWritableDatabase();
-        bdLibro = bookHelper.getWritableDatabase();
+        bdAuthor = authorHelper.getWritableDatabase();
+        bdBook = bookHelper.getWritableDatabase();
     }
 
     public void close(){
-        bdAutor.close();
-        bdLibro.close();
+        bdAuthor.close();
+        bdBook.close();
     }
 
     /*************************************************
@@ -34,11 +34,11 @@ public class Manager {
      *************************************************/
 
     public long insertAutor(Author author){
-        return bdAutor.insert(Contract.AuthorTable.TABLE_NAME, null, Contract.contentValuesAuthor(author));
+        return bdAuthor.insert(Contract.AuthorTable.TABLE_NAME, null, Contract.contentValuesAuthor(author));
     }
 
     public long insertLibro(Book book){
-        return bdLibro.insert(Contract.BookTable.TABLE_NAME, null, Contract.contentValuesBook(book));
+        return bdBook.insert(Contract.BookTable.TABLE_NAME, null, Contract.contentValuesBook(book));
     }
 
     /*************************************************
@@ -52,7 +52,7 @@ public class Manager {
     public int deleteLibro(long id){
         String condicion = Contract.BookTable._ID + " = ?";
         String[] argumentos = { id + "" };
-        return bdLibro.delete(Contract.BookTable.TABLE_NAME, condicion, argumentos);
+        return bdBook.delete(Contract.BookTable.TABLE_NAME, condicion, argumentos);
     }
 
     public int deleteAutor(Author author){
@@ -62,7 +62,7 @@ public class Manager {
     public int deleteAutor(long id){
         String condicion = Contract.AuthorTable._ID + " = ?";
         String[] argumentos = { id + "" };
-        return bdAutor.delete(Contract.AuthorTable.TABLE_NAME, condicion, argumentos);
+        return bdAuthor.delete(Contract.AuthorTable.TABLE_NAME, condicion, argumentos);
     }
 
     /*************************************************
@@ -72,13 +72,13 @@ public class Manager {
     public int updateLibro(Book book){
         String condicion = Contract.BookTable._ID + " = ?";
         String[] argumentos = { book.getId() + "" };
-        return bdLibro.update(Contract.BookTable.TABLE_NAME, Contract.contentValuesBook(book), condicion, argumentos);
+        return bdBook.update(Contract.BookTable.TABLE_NAME, Contract.contentValuesBook(book), condicion, argumentos);
     }
 
     public int updateAuthor(Author author){
         String condicion = Contract.AuthorTable._ID + " = ?";
         String[] argumentos = { author.getId() + "" };
-        return bdAutor.update(Contract.AuthorTable.TABLE_NAME, Contract.contentValuesAuthor(author), condicion, argumentos);
+        return bdAuthor.update(Contract.AuthorTable.TABLE_NAME, Contract.contentValuesAuthor(author), condicion, argumentos);
     }
 
     /*************************************************
@@ -90,7 +90,7 @@ public class Manager {
     }
 
     private Cursor getCursorAuthor(String condicion, String[] argumentos){
-        return bdAutor.query(
+        return bdAuthor.query(
                 Contract.AuthorTable.TABLE_NAME,
                 null,
                 condicion,
@@ -107,7 +107,7 @@ public class Manager {
     }
 
     private Cursor getCursorBook(String condicion, String[] argumentos){
-        return bdAutor.query(
+        return bdBook.query(
                 Contract.BookTable.TABLE_NAME,
                 null,
                 condicion,
@@ -172,12 +172,9 @@ public class Manager {
      ********************   SELECT  ******************
      *************************************************/
 
-    public List<Book> getAllBooks(String condicion){
+    public List<Book> getAllBooks(){
         List<Book> books = new ArrayList<>();
-        Cursor cursor = getCursorBook(condicion, null);
-        if(condicion == null){
-            cursor = getCursorBook();
-        }
+        Cursor cursor = getCursorBook();
         Book book;
 
         while(cursor.moveToNext()){

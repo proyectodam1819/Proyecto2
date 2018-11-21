@@ -103,18 +103,18 @@ public final class R {
         public static final int common_google_signin_btn_text_light_normal_background = 0x7f07006f;
         public static final int googleg_disabled_color_18 = 0x7f070076;
         public static final int googleg_standard_color_18 = 0x7f070077;
-        public static final int notification_action_background = 0x7f070086;
-        public static final int notification_bg = 0x7f070087;
-        public static final int notification_bg_low = 0x7f070088;
-        public static final int notification_bg_low_normal = 0x7f070089;
-        public static final int notification_bg_low_pressed = 0x7f07008a;
-        public static final int notification_bg_normal = 0x7f07008b;
-        public static final int notification_bg_normal_pressed = 0x7f07008c;
-        public static final int notification_icon_background = 0x7f07008d;
-        public static final int notification_template_icon_bg = 0x7f07008e;
-        public static final int notification_template_icon_low_bg = 0x7f07008f;
-        public static final int notification_tile_bg = 0x7f070090;
-        public static final int notify_panel_notification_icon_bg = 0x7f070091;
+        public static final int notification_action_background = 0x7f070087;
+        public static final int notification_bg = 0x7f070088;
+        public static final int notification_bg_low = 0x7f070089;
+        public static final int notification_bg_low_normal = 0x7f07008a;
+        public static final int notification_bg_low_pressed = 0x7f07008b;
+        public static final int notification_bg_normal = 0x7f07008c;
+        public static final int notification_bg_normal_pressed = 0x7f07008d;
+        public static final int notification_icon_background = 0x7f07008e;
+        public static final int notification_template_icon_bg = 0x7f07008f;
+        public static final int notification_template_icon_low_bg = 0x7f070090;
+        public static final int notification_tile_bg = 0x7f070091;
+        public static final int notify_panel_notification_icon_bg = 0x7f070092;
     }
     public static final class id {
         private id() {}
@@ -143,7 +143,7 @@ public final class R {
         public static final int light = 0x7f080078;
         public static final int line1 = 0x7f080079;
         public static final int line3 = 0x7f08007a;
-        public static final int media_actions = 0x7f080083;
+        public static final int media_actions = 0x7f080082;
         public static final int none = 0x7f080094;
         public static final int normal = 0x7f080095;
         public static final int notification_background = 0x7f080096;
@@ -206,7 +206,7 @@ public final class R {
         public static final int common_open_on_phone = 0x7f0e003d;
         public static final int common_signin_button_text = 0x7f0e003e;
         public static final int common_signin_button_text_long = 0x7f0e003f;
-        public static final int status_bar_notification_info_overflow = 0x7f0e006a;
+        public static final int status_bar_notification_info_overflow = 0x7f0e0071;
     }
     public static final class style {
         private style() {}

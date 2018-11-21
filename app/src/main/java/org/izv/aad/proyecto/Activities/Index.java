@@ -1,13 +1,12 @@
 package org.izv.aad.proyecto.Activities;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import org.izv.aad.proyecto.Adapters.AdapterIndex;
 import org.izv.aad.proyecto.DataBase.Manager;
@@ -24,13 +24,17 @@ import org.izv.aad.proyecto.Interfaces.OnItemClickListener;
 import org.izv.aad.proyecto.Objects.Book;
 import org.izv.aad.proyecto.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Index extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    Toolbar toolbar;
-    RecyclerView recyclerBooks;
-    List<Book> books;
-    Manager manager;
+    private Toolbar toolbar;
+    private RecyclerView recyclerBooks;
+    private List<Book> books;
+    private Manager manager;
+    private TextView msg_error_index;
+
+    public static int CODE_RESULT_MANAGEBOOKS_CREATE = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,18 +42,16 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         setContentView(R.layout.activity_index);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         init();
-
-
-
     }
 
     private void init(){
         initFloatingButton();
         initNavigarionDrawer();
-        initRecycler();
+        msg_error_index = findViewById(R.id.msg_error_index);
         manager = new Manager(this);
+        books = new ArrayList<>();
+        getBooks();
     }
 
     private void initFloatingButton(){
@@ -57,8 +59,8 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent manageBooks = new Intent(Index.this,ManageBooks.class);
+                startActivityForResult(manageBooks, CODE_RESULT_MANAGEBOOKS_CREATE);
             }
         });
     }
@@ -122,7 +124,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -135,30 +137,53 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
             @Override
             public void onBookClickListener(Book book) {
                 //Cuando se haga click hará algo aquí
+                Intent manageBooks = new Intent(Index.this, ShowBook.class);
+                manageBooks.putExtra("book",book);
+                startActivity(manageBooks);
             }
         });
         recyclerBooks.setAdapter(adaptador);
     }
 
-    @SuppressLint("StaticFieldLeak")
     private void getBooks(){
-        AsyncTask task = new AsyncTask(){
-            @Override
-            protected List<Book> doInBackground(Object[] objects) {
-                return manager.getAllBooks(null);
-            }
+        Log.v("XYZ", "1");
+        ThreadGetBooks hilo = new ThreadGetBooks();
+        Log.v("XYZ", "3");
+        hilo.execute();
+    }
 
-            @Override
-            protected void onPostExecute(Object o) {
-                super.onPostExecute(o);
-            }
+    private void checkRecyclerBooks(){
+        initRecycler();
+        if(books.size() <= 0){
+            msg_error_index.setText(getString(R.string.no_books));
+            msg_error_index.setVisibility(View.VISIBLE);
+        }else{
+            msg_error_index.setVisibility(View.GONE);
+        }
+    }
 
-            @Override
-            protected void onPostExecute(List<Book> booksGet) {
-                books = booksGet;
+    private class ThreadGetBooks extends AsyncTask <Integer, String, List<Book>> {
+
+        public ThreadGetBooks(){
+
+        }
+
+        @Override
+        protected List<Book> doInBackground(Integer... integers) {
+            List<Book> books = manager.getAllBooks();
+
+            if(books.size() <=0 ){
+                books = new ArrayList<>();
             }
-        };
-        books = manager.getAllBooks(null);
+            return books;
+        }
+
+        @Override
+        protected void onPostExecute(List<Book> booksThread) {
+            super.onPostExecute(books);
+            books = booksThread;
+            checkRecyclerBooks();
+        }
     }
 
 }

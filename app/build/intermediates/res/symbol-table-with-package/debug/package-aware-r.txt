@@ -1048,6 +1048,7 @@ drawable design_password_eye
 drawable design_snackbar_background
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
+drawable ic_android_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_menu_camera
@@ -1203,7 +1204,6 @@ id line3
 id listMode
 id list_item
 id login_btLogin
-id login_linkRegistrar
 id login_logo
 id login_mail
 id login_password
@@ -1213,6 +1213,7 @@ id message
 id middle
 id mini
 id msg_error
+id msg_error_index
 id mtrl_child_content_container
 id mtrl_internal_children_alpha_tag
 id multiply
@@ -1241,7 +1242,7 @@ id pin
 id progress_circular
 id progress_horizontal
 id radio
-id ratingBar
+id recyclerBooks
 id right
 id right_icon
 id right_side
@@ -1502,6 +1503,7 @@ string default_web_client_id
 string error_email_repeat
 string error_login_clave
 string error_login_email
+string error_login_no_email
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string firebase_database_url
@@ -1516,6 +1518,12 @@ string large_text
 string login
 string mail
 string msg_email_repeat
+string msg_loading
+string msg_login_clave
+string msg_login_email
+string msg_login_no_email
+string msg_no_text_in_contraseña
+string msg_no_text_in_email
 string mtrl_chip_close_icon_content_description
 string nav_header_desc
 string nav_header_subtitle
@@ -1524,6 +1532,7 @@ string navigation_drawer_close
 string navigation_drawer_open
 string next
 string noAccount
+string no_books
 string not_empty
 string not_equals
 string password
@@ -1535,7 +1544,6 @@ string path_password_strike_through
 string project_id
 string repitePass
 string search_menu_title
-string signUp
 string state
 string status_bar_notification_info_overflow
 string summary
