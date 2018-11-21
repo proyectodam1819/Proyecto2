@@ -27,6 +27,8 @@ import org.izv.aad.proyecto.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.System.exit;
+
 public class Index extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Toolbar toolbar;
     private RecyclerView recyclerBooks;
@@ -82,7 +84,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            //Salir de la app
         }
     }
 
@@ -185,5 +187,6 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
             checkRecyclerBooks();
         }
     }
+
 
 }
