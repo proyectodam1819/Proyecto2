@@ -780,6 +780,10 @@
         "source": "/Users/dam/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/88ffe6225913fb26c24d1aea66a3d979/res/layout/notification_template_media.xml"
     },
     {
+        "merged": "/Users/dam/AndroidStudioProjects/Proyecto/app/build/intermediates/res/merged/debug/layout_dialog_author.xml.flat",
+        "source": "/Users/dam/AndroidStudioProjects/Proyecto/app/src/main/res/layout/dialog_author.xml"
+    },
+    {
         "merged": "/Users/dam/AndroidStudioProjects/Proyecto/app/build/intermediates/res/merged/debug/anim_design_bottom_sheet_slide_in.xml.flat",
         "source": "/Users/dam/.gradle/caches/transforms-1/files-1.1/design-28.0.0.aar/36563a47c3c76bef18c6e821cbc35040/res/anim/design_bottom_sheet_slide_in.xml"
     },
@@ -2358,6 +2362,10 @@
     {
         "merged": "/Users/dam/AndroidStudioProjects/Proyecto/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",
         "source": "/Users/dam/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/72172bd821bae4e6d3c35240492109d3/res/drawable-xhdpi-v4/abc_scrubber_control_off_mtrl_alpha.png"
+    },
+    {
+        "merged": "/Users/dam/AndroidStudioProjects/Proyecto/app/build/intermediates/res/merged/debug/layout_dialog_author2.xml.flat",
+        "source": "/Users/dam/AndroidStudioProjects/Proyecto/app/src/main/res/layout/dialog_author2.xml"
     },
     {
         "merged": "/Users/dam/AndroidStudioProjects/Proyecto/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",

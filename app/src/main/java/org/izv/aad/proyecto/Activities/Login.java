@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseUser;
 
+import org.izv.aad.proyecto.Dialogs.DialogCustom;
 import org.izv.aad.proyecto.FireBase.FirebaseCustom;
 import org.izv.aad.proyecto.Interfaces.InterfaceFireBase;
 
@@ -37,7 +38,8 @@ public class Login extends AppCompatActivity {
     private TextView textViewError;
     private InterfaceFireBase interfaceFireBase;
     private ProgressDialog progressDialog;
-    private final String SAVE_SHARED_PREFERENCES = "user.xml";
+    public static final String SAVE_SHARED_PREFERENCES = "user.xml";
+    public static final String EMAIL = "email.xml";
     private CheckBox checkRemeber;
 
 
@@ -64,6 +66,7 @@ public class Login extends AppCompatActivity {
         loginlogo = findViewById(R.id.login_logo);
         textViewError=findViewById(R.id.textView);
         checkRemeber = findViewById(R.id.create_checkRemember);
+        progressDialog = DialogCustom.showDialog(this);
         interfaceFireBase = managerCallBack();
     }
 
@@ -82,7 +85,8 @@ public class Login extends AppCompatActivity {
         if(!loginpasswordET.getText().toString().equals("") && !loginmailET.getText().toString().equals("")) {
             createmailLayout.setErrorEnabled(false);
             createpasswordLayout.setErrorEnabled(false);
-            showDialog();
+            progressDialog.show();
+            saveSharedPreferencesEmail(loginmailET.getText().toString());
             FirebaseCustom.login(this, loginmailET.getText().toString(), loginpasswordET.getText().toString(), interfaceFireBase);
 
         }
@@ -160,21 +164,24 @@ public class Login extends AppCompatActivity {
         editor.commit();
     }
 
+    private void saveSharedPreferencesEmail(String email){
+        SharedPreferences prefs =  getSharedPreferences(EMAIL, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("email", email);
+        editor.commit();
+    }
+
     private void checkSharedPreferences(){
         SharedPreferences pref = getSharedPreferences(SAVE_SHARED_PREFERENCES, MODE_PRIVATE);
         String email = pref.getString("email", null);
         String pass = pref.getString("pass", null);
         if(email != null && pass != null){
-            showDialog();
+            progressDialog.show();
+            saveSharedPreferencesEmail(email);
             FirebaseCustom.login(this, email, pass, interfaceFireBase);
 
         }
     }
 
-    private void showDialog(){
-        progressDialog= new ProgressDialog(this);
-        progressDialog.setMessage(getString(R.string.msg_loading));
-        //progressDialog.setIcon(R.drawable.ic_android_black_24dp);
-        progressDialog.show();
-    }
+
 }

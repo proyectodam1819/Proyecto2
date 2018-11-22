@@ -12,6 +12,7 @@ MERGED from [com.google.firebase:firebase-auth:16.0.5] /Users/dam/.gradle/caches
 MERGED from [com.google.firebase:firebase-database:16.0.4] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-database-16.0.4.aar/237bdb31fdebfe2ab310cbe26beabad8/AndroidManifest.xml:15:1-25:12
 MERGED from [com.google.firebase:firebase-storage:16.0.4] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.0.4.aar/4d6c897827075090f048a761f161c82d/AndroidManifest.xml:15:1-26:12
 MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:17:1-39:12
+MERGED from [com.github.bumptech.glide:glide:4.7.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/glide-4.7.1.aar/014d2ce8134dac088362b7ea0d4525af/AndroidManifest.xml:2:1-13:12
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/6208507f6eab95b62639c4c80dae323c/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/95a2ee3896f14f4e6e2269976ba6b19a/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:transition:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/transition-28.0.0.aar/c434db08f4290827f57649e99066583c/AndroidManifest.xml:17:1-22:12
@@ -52,14 +53,15 @@ MERGED from [com.android.support:support-compat:28.0.0] /Users/dam/.gradle/cache
 MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/47a95de4953e870b1c4a4353fa4fe4e6/AndroidManifest.xml:17:1-25:12
 MERGED from [com.android.support:cursoradapter:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/a538cf04a6678a73b9fc19e18cbc011a/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:cardview-v7:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/839667290a60771bee1bd39984998dcd/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/ed0afc242a76dbeae946092a51f5c55a/AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.7.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.7.1.aar/a1b3c03a4211be10c466210720311252/AndroidManifest.xml:2:1-11:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/69bb2b20c67b5360cef5eff00bf7ee76/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/9bf2173e056d1192363500cec3e4267d/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/4e2aeb0bb2dd1ce32608e999018dd1bb/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/18783cc61104b23d5a5e864d38f15b75/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/ed0afc242a76dbeae946092a51f5c55a/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:documentfile:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/abbec3a6cfc8246d5cb939fc8e4559ce/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/f614715de72a854b6922ab36d7469b72/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:print:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/1557d0dafb287a86f63f66335249ca53/AndroidManifest.xml:17:1-22:12
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/69bb2b20c67b5360cef5eff00bf7ee76/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:interpolator:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/ef4350dfa6d0fae2e10379e66f232d2d/AndroidManifest.xml:17:1-22:12
 INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-36:12
 INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml:2:1-36:12
@@ -92,6 +94,8 @@ MERGED from [com.google.firebase:firebase-auth:16.0.5] /Users/dam/.gradle/caches
 MERGED from [com.google.firebase:firebase-auth:16.0.5] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-auth-16.0.5.aar/c098f9a82bf8513093ec1ba0d5b98395/AndroidManifest.xml:23:5-40:19
 MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:22:5-37:19
 MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:22:5-37:19
+MERGED from [com.github.bumptech.glide:glide:4.7.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/glide-4.7.1.aar/014d2ce8134dac088362b7ea0d4525af/AndroidManifest.xml:11:5-20
+MERGED from [com.github.bumptech.glide:glide:4.7.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/glide-4.7.1.aar/014d2ce8134dac088362b7ea0d4525af/AndroidManifest.xml:11:5-20
 MERGED from [com.google.firebase:firebase-measurement-connector-impl:17.0.3] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.3.aar/fe8a9638f9ba91bc7adbb03933e3257c/AndroidManifest.xml:26:5-32:19
 MERGED from [com.google.firebase:firebase-measurement-connector-impl:17.0.3] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-measurement-connector-impl-17.0.3.aar/fe8a9638f9ba91bc7adbb03933e3257c/AndroidManifest.xml:26:5-32:19
 MERGED from [com.google.firebase:firebase-analytics:16.0.5] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-analytics-16.0.5.aar/98fa51e58d60a7dd3c7ae2fd16d58f1d/AndroidManifest.xml:28:5-53:19
@@ -130,6 +134,8 @@ MERGED from [com.android.support:support-compat:28.0.0] /Users/dam/.gradle/cache
 MERGED from [com.android.support:support-compat:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/e0be1ccbfec168fe71847f40c6715f9c/AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/47a95de4953e870b1c4a4353fa4fe4e6/AndroidManifest.xml:22:5-23:19
 MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/47a95de4953e870b1c4a4353fa4fe4e6/AndroidManifest.xml:22:5-23:19
+MERGED from [com.github.bumptech.glide:gifdecoder:4.7.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.7.1.aar/a1b3c03a4211be10c466210720311252/AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.7.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.7.1.aar/a1b3c03a4211be10c466210720311252/AndroidManifest.xml:9:5-20
 	android:appComponentFactory
 		ADDED from [com.android.support:support-compat:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/e0be1ccbfec168fe71847f40c6715f9c/AndroidManifest.xml:22:18-91
 	android:supportsRtl
@@ -212,6 +218,8 @@ MERGED from [com.google.firebase:firebase-storage:16.0.4] /Users/dam/.gradle/cac
 MERGED from [com.google.firebase:firebase-storage:16.0.4] /Users/dam/.gradle/caches/transforms-1/files-1.1/firebase-storage-16.0.4.aar/4d6c897827075090f048a761f161c82d/AndroidManifest.xml:19:5-21:41
 MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-auth:16.0.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-auth-16.0.1.aar/c7a14d0133c231c16e1021c3ba0cdd30/AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:glide:4.7.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/glide-4.7.1.aar/014d2ce8134dac088362b7ea0d4525af/AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.bumptech.glide:glide:4.7.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/glide-4.7.1.aar/014d2ce8134dac088362b7ea0d4525af/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/6208507f6eab95b62639c4c80dae323c/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/6208507f6eab95b62639c4c80dae323c/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/95a2ee3896f14f4e6e2269976ba6b19a/AndroidManifest.xml:20:5-44
@@ -292,22 +300,24 @@ MERGED from [com.android.support:cursoradapter:28.0.0] /Users/dam/.gradle/caches
 MERGED from [com.android.support:cursoradapter:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/a538cf04a6678a73b9fc19e18cbc011a/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:cardview-v7:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/839667290a60771bee1bd39984998dcd/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:cardview-v7:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/cardview-v7-28.0.0.aar/839667290a60771bee1bd39984998dcd/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/ed0afc242a76dbeae946092a51f5c55a/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/ed0afc242a76dbeae946092a51f5c55a/AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:gifdecoder:4.7.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.7.1.aar/a1b3c03a4211be10c466210720311252/AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.7.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.7.1.aar/a1b3c03a4211be10c466210720311252/AndroidManifest.xml:5:5-7:41
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/69bb2b20c67b5360cef5eff00bf7ee76/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/69bb2b20c67b5360cef5eff00bf7ee76/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/9bf2173e056d1192363500cec3e4267d/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/9bf2173e056d1192363500cec3e4267d/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/4e2aeb0bb2dd1ce32608e999018dd1bb/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/4e2aeb0bb2dd1ce32608e999018dd1bb/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/18783cc61104b23d5a5e864d38f15b75/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.core:runtime:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/18783cc61104b23d5a5e864d38f15b75/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/ed0afc242a76dbeae946092a51f5c55a/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/ed0afc242a76dbeae946092a51f5c55a/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:documentfile:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/abbec3a6cfc8246d5cb939fc8e4559ce/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:documentfile:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/abbec3a6cfc8246d5cb939fc8e4559ce/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/f614715de72a854b6922ab36d7469b72/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/f614715de72a854b6922ab36d7469b72/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:print:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/1557d0dafb287a86f63f66335249ca53/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:print:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/1557d0dafb287a86f63f66335249ca53/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/69bb2b20c67b5360cef5eff00bf7ee76/AndroidManifest.xml:20:5-44
-MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/dam/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/69bb2b20c67b5360cef5eff00bf7ee76/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:interpolator:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/ef4350dfa6d0fae2e10379e66f232d2d/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:interpolator:28.0.0] /Users/dam/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/ef4350dfa6d0fae2e10379e66f232d2d/AndroidManifest.xml:20:5-44
 INJECTED from /Users/dam/AndroidStudioProjects/Proyecto/app/src/main/AndroidManifest.xml

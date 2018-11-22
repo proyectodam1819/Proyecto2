@@ -1207,9 +1207,9 @@ id icon_group
 id icon_only
 id ifRoom
 id image
-id imageView
 id imageView2
 id imageView3
+id index_imageUser
 id info
 id invisible
 id italic
@@ -1241,9 +1241,9 @@ id nav_gallery
 id nav_manage
 id nav_send
 id nav_share
-id nav_slideshow
 id nav_view
 id navigation_header_container
+id negative
 id never
 id none
 id normal
@@ -1258,6 +1258,7 @@ id parentPanel
 id parent_matrix
 id percent
 id pin
+id positive
 id progress_circular
 id progress_horizontal
 id radio
@@ -1290,6 +1291,7 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
+id sign_out
 id smallLabel
 id snackbar_action
 id snackbar_text
@@ -1314,6 +1316,7 @@ id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
 id text
 id text2
+id textInputLayout
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
@@ -1322,10 +1325,12 @@ id textView2
 id textView3
 id textView4
 id textView5
+id textView6
 id text_input_password_toggle
 id textinput_counter
 id textinput_error
 id textinput_helper_text
+id tilCreateAuthor
 id time
 id title
 id titleDividerNoCustom
@@ -1424,6 +1429,8 @@ layout design_navigation_item_subheader
 layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_password_icon
+layout dialog_author
+layout dialog_author2
 layout fragment_logup1
 layout fragment_logup2
 layout logup
@@ -1553,6 +1560,7 @@ string nav_header_subtitle
 string nav_header_title
 string navigation_drawer_close
 string navigation_drawer_open
+string negative
 string next
 string noAccount
 string no_books
@@ -1564,6 +1572,7 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string positive
 string project_id
 string repitePass
 string search_menu_title
@@ -1572,6 +1581,7 @@ string status_bar_notification_info_overflow
 string summary
 string title
 string title_activity_mostrar_libro
+string title_author
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

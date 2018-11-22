@@ -11,6 +11,10 @@ public class Author implements Parcelable {
     private long id;
     private String name, key;
 
+    public Author(String name){
+        this(0, name, "");
+    }
+
     public Author() {
         this(0,"", "");
     }

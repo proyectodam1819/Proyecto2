@@ -140,4 +140,9 @@
     <string name="error_email_repeat">com.google.firebase.auth.FirebaseAuthUserCollisionException: The email address is already in use by another account.</string>
     <string name="msg_email_repeat">The email address is already in use by another account.</string>
 
+    <!-- DIALOG AUTHOR -->
+    <string name="title_author">Create an author</string>
+    <string name="positive">Create</string>
+    <string name="negative">Cancel</string>
+
 </resources>

@@ -1,6 +1,8 @@
 package org.izv.aad.proyecto.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,13 +18,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.izv.aad.proyecto.Adapters.AdapterIndex;
 import org.izv.aad.proyecto.DataBase.Manager;
+import org.izv.aad.proyecto.FireBase.FirebaseCustom;
 import org.izv.aad.proyecto.Interfaces.OnItemClickListener;
 import org.izv.aad.proyecto.Objects.Book;
 import org.izv.aad.proyecto.R;
+import org.izv.aad.proyecto.Utils.Gravatar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +43,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     private List<Book> books;
     private Manager manager;
     private TextView msg_error_index;
+    private ImageView index_imageUser;
 
     public static int CODE_RESULT_MANAGEBOOKS_CREATE = 100;
 
@@ -45,7 +54,12 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         init();
+        getEmailSharedPreferences();
     }
+
+    /**********************************************************
+     * ******************** INIT METHODS ******************** *
+     **********************************************************/
 
     private void init(){
         initFloatingButton();
@@ -76,15 +90,36 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerView = navigationView.getHeaderView(0);
+        index_imageUser = headerView.findViewById(R.id.index_imageUser);
+    }
+
+    private void initRecycler(){
+        recyclerBooks = findViewById(R.id.recyclerBooks);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        recyclerBooks.setLayoutManager(mLayoutManager);
+        AdapterIndex adaptador = new AdapterIndex(this, books, new OnItemClickListener() {
+            @Override
+            public void onBookClickListener(Book book) {
+                //Cuando se haga click hará algo aquí
+                Intent manageBooks = new Intent(Index.this, ShowBook.class);
+                manageBooks.putExtra("book",book);
+                startActivity(manageBooks);
+            }
+        });
+        recyclerBooks.setAdapter(adaptador);
     }
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        //Close navigation
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            //Salir de la app
+        }
+        //Close app
+        else {
             Intent homeIntent = new Intent(Intent.ACTION_MAIN);
             homeIntent.addCategory( Intent.CATEGORY_HOME );
             homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -110,6 +145,10 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         return super.onOptionsItemSelected(item);
     }
 
+    /**********************************************************
+     * ***************** OPTIONS NAVIGATION ***************** *
+     **********************************************************/
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -120,8 +159,9 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
-
+        } else if (id == R.id.sign_out) {
+            removeSharedPreferences();
+            finish();
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
@@ -129,32 +169,46 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         } else if (id == R.id.nav_send) {
 
         }
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    private void initRecycler(){
-        recyclerBooks = findViewById(R.id.recyclerBooks);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-        recyclerBooks.setLayoutManager(mLayoutManager);
-        AdapterIndex adaptador = new AdapterIndex(this, books, new OnItemClickListener() {
-            @Override
-            public void onBookClickListener(Book book) {
-                //Cuando se haga click hará algo aquí
-                Intent manageBooks = new Intent(Index.this, ShowBook.class);
-                manageBooks.putExtra("book",book);
-                startActivity(manageBooks);
-            }
-        });
-        recyclerBooks.setAdapter(adaptador);
+    /**********************************************************
+     * ******************** UTILS METHODS ******************** *
+     **********************************************************/
+
+    private void getEmailSharedPreferences(){
+        SharedPreferences pref = getSharedPreferences(Login.EMAIL, MODE_PRIVATE);
+        String email = pref.getString("email", null);
+        String imageUrl = null;
+        if(email != null) {
+            imageUrl = Gravatar.codeGravatarImage(email);
+        }
+        setGravatar(imageUrl);
+
+    }
+
+    private void setGravatar(String imageUrl){
+        Glide.with(this)
+            .load(imageUrl)
+            .apply(
+                new RequestOptions()
+                    .placeholder(R.mipmap.ic_launcher)
+                    .fitCenter()
+            )
+            .into(index_imageUser);
+    }
+
+    private void removeSharedPreferences(){
+        SharedPreferences pref = getSharedPreferences(Login.EMAIL, MODE_PRIVATE);
+        pref.edit().clear().commit();
+        pref = getSharedPreferences(Login.SAVE_SHARED_PREFERENCES, MODE_PRIVATE);
+        pref.edit().clear().commit();
     }
 
     private void getBooks(){
-        Log.v("XYZ", "1");
         ThreadGetBooks hilo = new ThreadGetBooks();
-        Log.v("XYZ", "3");
         hilo.execute();
     }
 
@@ -167,6 +221,11 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
             msg_error_index.setVisibility(View.GONE);
         }
     }
+
+    /**********************************************************
+     * ******************** ANOTHER CLASS ******************** *
+     **********************************************************/
+
 
     private class ThreadGetBooks extends AsyncTask <Integer, String, List<Book>> {
 
@@ -191,6 +250,5 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
             checkRecyclerBooks();
         }
     }
-
 
 }
