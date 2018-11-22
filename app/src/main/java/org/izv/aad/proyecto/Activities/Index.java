@@ -85,6 +85,10 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
             drawer.closeDrawer(GravityCompat.START);
         } else {
             //Salir de la app
+            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+            homeIntent.addCategory( Intent.CATEGORY_HOME );
+            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(homeIntent);
         }
     }
 
