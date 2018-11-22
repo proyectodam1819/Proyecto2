@@ -122,6 +122,7 @@
     <string name="msg_no_text_in_email">write an email</string>
     <string name="msg_no_text_in_contraseña">write a password</string>
     <string name="msg_loading">Loading...</string>
+    <string name="checkbox_remember">Remember the session</string>
 
     //Index
     <string name="no_books">No books found, try to create them</string>

@@ -1124,6 +1124,7 @@ id center
 id center_horizontal
 id center_vertical
 id chains
+id checkRemember
 id checkbox
 id chronometer
 id clip_horizontal
@@ -1478,6 +1479,7 @@ string author
 string bottom_sheet_behavior
 string character_counter_content_description
 string character_counter_pattern
+string checkbox_remember
 string common_google_play_services_enable_button
 string common_google_play_services_enable_text
 string common_google_play_services_enable_title

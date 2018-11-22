@@ -2,6 +2,7 @@ package org.izv.aad.proyecto.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,10 +23,10 @@ import org.izv.aad.proyecto.Interfaces.InterfaceFireBase;
 
 import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
+import org.izv.aad.proyecto.Objects.Encrypter;
 import org.izv.aad.proyecto.R;
 
 public class Login extends AppCompatActivity {
-
     private TextView tvLogup;
     private ImageView loginlogo;
     private TextInputEditText loginmailET;
@@ -38,6 +40,8 @@ public class Login extends AppCompatActivity {
     private TextView textViewError;
     private InterfaceFireBase interfaceFireBase;
     private ProgressDialog progressDialog;
+    private final String SAVE_SHARED_PREFERENCES = "user.xml";
+    private CheckBox checkRemeber;
 
 
     @Override
@@ -47,7 +51,7 @@ public class Login extends AppCompatActivity {
         init();
         initLogUp();
         setClickLogin();
-
+        checkSharedPreferences();
     }
 
     private void init(){
@@ -62,6 +66,7 @@ public class Login extends AppCompatActivity {
         loginmailET = findViewById(R.id.login_mail);
         loginlogo = findViewById(R.id.login_logo);
         textViewError=findViewById(R.id.textView);
+        checkRemeber = findViewById(R.id.checkRemember);
         interfaceFireBase = managerCallBack();
     }
 
@@ -80,12 +85,7 @@ public class Login extends AppCompatActivity {
         if(!loginpasswordET.getText().toString().equals("") && !loginmailET.getText().toString().equals("")) {
             createmailLayout.setErrorEnabled(false);
             createpasswordLayout.setErrorEnabled(false);
-
-            progressDialog= new ProgressDialog(this);
-            progressDialog.setMessage(getString(R.string.msg_loading));
-            //progressDialog.setIcon(R.drawable.ic_android_black_24dp);
-            progressDialog.show();
-
+            showDialog();
             FirebaseCustom.login(this, loginmailET.getText().toString(), loginpasswordET.getText().toString(), interfaceFireBase);
 
         }
@@ -143,12 +143,41 @@ public class Login extends AppCompatActivity {
                     createmailLayout.setErrorEnabled(true);
                     textViewError.setVisibility(View.GONE);
                 }else{
+                    if (checkRemeber.isChecked()) {
+                        String email = loginmailET.getText().toString();
+                        String pass = loginpasswordET.getText().toString();
+                        saveSharedPreferences(email, pass);
+                    }
                     Intent i = new Intent(Login.this, Index.class);
                     startActivity(i);
                 }
             }
-
-
         };
+    }
+
+    private void saveSharedPreferences(String email, String pass){
+        SharedPreferences prefs =  getSharedPreferences(SAVE_SHARED_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("email", email);
+        editor.putString("pass", pass);
+        editor.commit();
+    }
+
+    private void checkSharedPreferences(){
+        SharedPreferences pref = getSharedPreferences(SAVE_SHARED_PREFERENCES, MODE_PRIVATE);
+        String email = pref.getString("email", null);
+        String pass = pref.getString("pass", null);
+        if(email != null && pass != null){
+            showDialog();
+            FirebaseCustom.login(this, email, pass, interfaceFireBase);
+
+        }
+    }
+
+    private void showDialog(){
+        progressDialog= new ProgressDialog(this);
+        progressDialog.setMessage(getString(R.string.msg_loading));
+        //progressDialog.setIcon(R.drawable.ic_android_black_24dp);
+        progressDialog.show();
     }
 }
