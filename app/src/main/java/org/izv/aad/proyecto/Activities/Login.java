@@ -3,12 +3,10 @@ package org.izv.aad.proyecto.Activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -23,7 +21,6 @@ import org.izv.aad.proyecto.Interfaces.InterfaceFireBase;
 
 import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
-import org.izv.aad.proyecto.Objects.Encrypter;
 import org.izv.aad.proyecto.R;
 
 public class Login extends AppCompatActivity {
@@ -66,7 +63,7 @@ public class Login extends AppCompatActivity {
         loginmailET = findViewById(R.id.login_mail);
         loginlogo = findViewById(R.id.login_logo);
         textViewError=findViewById(R.id.textView);
-        checkRemeber = findViewById(R.id.checkRemember);
+        checkRemeber = findViewById(R.id.create_checkRemember);
         interfaceFireBase = managerCallBack();
     }
 
