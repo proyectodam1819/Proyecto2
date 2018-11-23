@@ -23,7 +23,7 @@ public class Contract {
                     "FOREIGN KEY("+ BookTable.COLUMN_ID_AUTHOR +") REFERENCES "+ AuthorTable.COLUMN_NAME +"("+ AuthorTable._ID+") )";
 
 
-    private static final String SQL_DELETE_TABLE_BOOK =
+    public static final String SQL_DELETE_TABLE_BOOK =
             "DROP TABLE if exists " + BookTable.TABLE_NAME;
 
 
@@ -34,7 +34,7 @@ public class Contract {
                     AuthorTable.COLUMN_NAME + " text)";
 
 
-    private static final String SQL_DELETE_TABLE_AUTHOR =
+    public static final String SQL_DELETE_TABLE_AUTHOR =
             "DROP TABLE if exists " + AuthorTable.TABLE_NAME;
 
     private Contract(){}

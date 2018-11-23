@@ -198,4 +198,9 @@ public class Manager {
         }
         return authors;
     }
+
+    public void dropTables(){
+        authorHelper.dropTable(bdAuthor);
+        bookHelper.dropTable(bdBook);
+    }
 }

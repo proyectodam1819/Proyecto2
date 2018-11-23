@@ -24,4 +24,8 @@ public class AuthorHelper extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+    public void dropTable(SQLiteDatabase db){
+        db.execSQL(Contract.SQL_DELETE_TABLE_AUTHOR);
+    }
 }

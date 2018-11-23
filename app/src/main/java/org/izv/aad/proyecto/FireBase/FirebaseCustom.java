@@ -2,6 +2,7 @@ package org.izv.aad.proyecto.FireBase;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,6 +19,8 @@ import com.google.firebase.database.ValueEventListener;
 import org.izv.aad.proyecto.Interfaces.InterfaceFireBase;
 import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -179,6 +182,34 @@ public class FirebaseCustom {
         Map<String, Object> saveItem = new HashMap<>();
         saveItem.put(getRouteAuthor(author.getKey()), null);
         getReference().updateChildren(saveItem);
+    }
+
+    public static void getAllBooks(){
+        Query query = getReference().child(getUser().getUid() + "/book/");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                /*if(dataSnapshot != null) {
+                    try {
+                        JSONObject jsonParse = new JSONObject(dataSnapshot.getValue().toString());
+                        Log.v("XYZ", jsonParse.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }*/
+
+                /*Map <String, Object> items = (Map<String, Object>) dataSnapshot.getValue();
+                for(Map.Entry<String,Object> entry: items.entrySet()){
+                    Map mapItem = (Map) entry.getValue();
+                    interfaceFireBase.getBook(Book.fromMap(mapItem));
+                }*/
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 

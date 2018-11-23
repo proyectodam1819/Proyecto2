@@ -25,4 +25,7 @@ public class BookHelper extends SQLiteOpenHelper {
 
     }
 
+    public void dropTable(SQLiteDatabase db){
+        db.execSQL(Contract.SQL_DELETE_TABLE_BOOK);
+    }
 }

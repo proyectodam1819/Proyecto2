@@ -62,6 +62,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
      **********************************************************/
 
     private void init(){
+        updateBooksFromFirebase();
         initFloatingButton();
         initNavigarionDrawer();
         msg_error_index = findViewById(R.id.msg_error_index);
@@ -161,6 +162,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
 
         } else if (id == R.id.sign_out) {
             removeSharedPreferences();
+            removeBD();
             finish();
         } else if (id == R.id.nav_manage) {
 
@@ -222,6 +224,14 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         }
     }
 
+    private void removeBD(){
+        manager.dropTables();
+    }
+
+    private void updateBooksFromFirebase(){
+        FirebaseCustom.getAllBooks();
+    }
+
     /**********************************************************
      * ******************** ANOTHER CLASS ******************** *
      **********************************************************/
@@ -229,9 +239,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
 
     private class ThreadGetBooks extends AsyncTask <Integer, String, List<Book>> {
 
-        public ThreadGetBooks(){
-
-        }
+        public ThreadGetBooks(){}
 
         @Override
         protected List<Book> doInBackground(Integer... integers) {
@@ -250,5 +258,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
             checkRecyclerBooks();
         }
     }
+
+
 
 }
