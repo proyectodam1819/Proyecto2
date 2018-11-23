@@ -189,14 +189,27 @@ public class FirebaseCustom {
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                /*if(dataSnapshot != null) {
+                if(dataSnapshot != null) {
+                    Log.v("XYZ", "entro");
+                    Map<String, Object> objetos = (Map<String, Object>) dataSnapshot.getValue();
+                    Log.v("XYZ", (String) objetos.get("-LS-hX52O_PuWddwsO4k"));
+
+
+
                     try {
-                        JSONObject jsonParse = new JSONObject(dataSnapshot.getValue().toString());
+                        String jsonString = dataSnapshot.getValue().toString();
+
+                        Log.v("XYZ", jsonString);
+                        JSONObject jsonParse = new JSONObject(jsonString);
+                        Log.v("XYZ", "bien");
+                        Log.v("XYZ", jsonParse.length()+ "");
+
                         Log.v("XYZ", jsonParse.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        Log.v("XYZ", "mal");
                     }
-                }*/
+                }
 
                 /*Map <String, Object> items = (Map<String, Object>) dataSnapshot.getValue();
                 for(Map.Entry<String,Object> entry: items.entrySet()){
