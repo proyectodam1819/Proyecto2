@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -23,11 +22,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.izv.aad.proyecto.Adapters.AdapterIndex;
 import org.izv.aad.proyecto.DataBase.Manager;
 import org.izv.aad.proyecto.FireBase.FirebaseCustom;
+import org.izv.aad.proyecto.Interfaces.InterfaceFireBase;
 import org.izv.aad.proyecto.Interfaces.OnItemClickListener;
+import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
 import org.izv.aad.proyecto.R;
 import org.izv.aad.proyecto.Utils.Gravatar;
@@ -43,6 +45,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     private List<Book> books;
     private Manager manager;
     private TextView msg_error_index;
+    private InterfaceFireBase interfaceFireBase;
     private ImageView index_imageUser;
 
     public static int CODE_RESULT_MANAGEBOOKS_CREATE = 100;
@@ -62,12 +65,16 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
      **********************************************************/
 
     private void init(){
+
+        getInterfacesMethorFirebase();
         updateBooksFromFirebase();
         initFloatingButton();
         initNavigarionDrawer();
         msg_error_index = findViewById(R.id.msg_error_index);
         manager = new Manager(this);
         books = new ArrayList<>();
+        Book book = new Book();
+        saveBooks(book);
         getBooks();
     }
 
@@ -229,7 +236,46 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     private void updateBooksFromFirebase(){
-        FirebaseCustom.getAllBooks();
+        FirebaseCustom.getAllBooks(interfaceFireBase);
+    }
+
+    private void getInterfacesMethorFirebase(){
+        interfaceFireBase = new InterfaceFireBase() {
+            @Override
+            public void isCorrectlyLogUp(boolean isSuccessful, String error) {
+
+            }
+
+            @Override
+            public Book getBook(Book book) {
+                return null;
+            }
+
+            @Override
+            public Author getAuthor(Author author) {
+                return null;
+            }
+
+            @Override
+            public void getUserLogin(FirebaseUser user, String error) {
+
+            }
+
+            @Override
+            public List<Book> getAllBooks(List<Book> books) {
+                for(Book book : books){
+                    saveBooks(book);
+                }
+                return books;
+            }
+        };
+    }
+
+    private void saveBooks(Book book){
+        Long id = manager.insertLibro(book);
+        book.setId(id);
+        book = FirebaseCustom.saveBook(book);
+        manager.updateLibro(book);
     }
 
     /**********************************************************

@@ -18,6 +18,8 @@ import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
 import org.izv.aad.proyecto.R;
 
+import java.util.List;
+
 public class Logup extends AppCompatActivity {
 
     private TextView create_mail,create_password, create_repitePassword,msg_error;
@@ -80,6 +82,11 @@ public class Logup extends AppCompatActivity {
             @Override
             public void getUserLogin(FirebaseUser user, String error) {
 
+            }
+
+            @Override
+            public List<Book> getAllBooks(List<Book> books) {
+                return null;
             }
 
         };

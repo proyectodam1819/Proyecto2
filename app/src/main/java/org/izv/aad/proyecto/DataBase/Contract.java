@@ -6,6 +6,8 @@ import android.provider.BaseColumns;
 import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
 
+import java.util.Date;
+
 public class Contract {
 
     public static final String SQL_CREATE_TABLE_BOOK =
@@ -66,8 +68,8 @@ public class Contract {
         cv.put(BookTable.COLUMN_RESUME, book.getResume());
         cv.put(BookTable.COLUMN_ASSESSMENT, book.getAssessment());
         cv.put(BookTable.COLUMN_FAVORITE, book.isFavorite());
-        cv.put(BookTable.COLUMN_START_DATE, String.valueOf(book.getStartDate()));
-        cv.put(BookTable.COLUMN_END_DATE, String.valueOf(book.getEndDate()));
+        cv.put(BookTable.COLUMN_START_DATE, book.getStartDate().toString());
+        cv.put(BookTable.COLUMN_END_DATE, book.getEndDate().toString());
         return cv;
     }
 

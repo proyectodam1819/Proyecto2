@@ -3,11 +3,13 @@ package org.izv.aad.proyecto.DataBase;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +18,10 @@ public class Manager {
     private AuthorHelper authorHelper;
     private BookHelper bookHelper;
     private SQLiteDatabase bdBook, bdAuthor;
+    SimpleDateFormat format;
 
     public Manager(Context context){
+        format = new SimpleDateFormat("yyyy-MM-dd");
         this.authorHelper = new AuthorHelper(context);
         this.bookHelper = new BookHelper(context);
         bdAuthor = authorHelper.getWritableDatabase();
@@ -142,13 +146,16 @@ public class Manager {
         book.setResume(cursor.getString(posResume));
         book.setId(cursor.getLong(posId));
         book.setIdAuthor(cursor.getLong(posIdAuthor));
-        book.setAssessment(cursor.getInt(posAssessment));
+        book.setAssessment(cursor.getFloat(posAssessment));
         book.setKey(cursor.getString(posKey));
         if(cursor.getInt(posFavorite) > 0){
             book.setFavorite(true);
         }else{
             book.setFavorite(false);
         }
+
+        Log.v("XYZ", cursor.getString(posStartDate));
+
         book.setStartDate(Date.valueOf(cursor.getString(posStartDate)));
         book.setEndDate(Date.valueOf(cursor.getString(posEndDate)));
 

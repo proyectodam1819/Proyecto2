@@ -22,7 +22,9 @@ import org.izv.aad.proyecto.Objects.Book;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FirebaseCustom {
@@ -184,38 +186,20 @@ public class FirebaseCustom {
         getReference().updateChildren(saveItem);
     }
 
-    public static void getAllBooks(){
+    public static void getAllBooks(final InterfaceFireBase interfaceFireBase){
         Query query = getReference().child(getUser().getUid() + "/book/");
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<Book> books = new ArrayList<>();
                 if(dataSnapshot != null) {
-                    Log.v("XYZ", "entro");
-                    Map<String, Object> objetos = (Map<String, Object>) dataSnapshot.getValue();
-                    Log.v("XYZ", (String) objetos.get("-LS-hX52O_PuWddwsO4k"));
-
-
-
-                    try {
-                        String jsonString = dataSnapshot.getValue().toString();
-
-                        Log.v("XYZ", jsonString);
-                        JSONObject jsonParse = new JSONObject(jsonString);
-                        Log.v("XYZ", "bien");
-                        Log.v("XYZ", jsonParse.length()+ "");
-
-                        Log.v("XYZ", jsonParse.toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Log.v("XYZ", "mal");
+                    Map<String, Object> items = (Map<String, Object>) dataSnapshot.getValue();
+                    for (Map.Entry<String, Object> entry : items.entrySet()) {
+                        Map mapItem = (Map) entry.getValue();
+                        books.add(Book.fromMap(mapItem));
                     }
                 }
-
-                /*Map <String, Object> items = (Map<String, Object>) dataSnapshot.getValue();
-                for(Map.Entry<String,Object> entry: items.entrySet()){
-                    Map mapItem = (Map) entry.getValue();
-                    interfaceFireBase.getBook(Book.fromMap(mapItem));
-                }*/
+                interfaceFireBase.getAllBooks(books);
             }
 
             @Override

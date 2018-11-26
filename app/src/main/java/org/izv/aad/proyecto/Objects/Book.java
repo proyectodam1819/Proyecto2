@@ -2,7 +2,10 @@ package org.izv.aad.proyecto.Objects;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,15 +14,18 @@ public class Book implements Parcelable {
 
     private long id, idAuthor;
     private String title, urlPhoto, resume, key;
-    private int assessment;
+    private float assessment;
     private boolean favorite;
     private Date startDate, endDate;
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public Book() {
         this(0 ,0, "", "" ,"" ,"" ,0 ,false , new Date(), new Date());
     }
 
-    public Book(long id, long idAuthor, String key, String title, String urlPhoto, String resume, int assessment, boolean favorite, Date startDate, Date endDate) {
+    public Book(long id, long idAuthor, String key, String title, String urlPhoto, String resume, float assessment, boolean favorite, Date startDate, Date endDate) {
+        sdf = new SimpleDateFormat("yyyy-MM-dd");
         this.title = title;
         this.urlPhoto = urlPhoto;
         this.key = key;
@@ -28,8 +34,13 @@ public class Book implements Parcelable {
         this.idAuthor = idAuthor;
         this.assessment = assessment;
         this.favorite = favorite;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        try {
+            this.startDate = sdf.parse(startDate.toString());
+            this.endDate = sdf.parse(endDate.toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 
     protected Book(Parcel in) {
@@ -39,7 +50,7 @@ public class Book implements Parcelable {
         urlPhoto = in.readString();
         resume = in.readString();
         key = in.readString();
-        assessment = in.readInt();
+        assessment = in.readFloat();
         favorite = in.readByte() != 0;
     }
 
@@ -107,11 +118,11 @@ public class Book implements Parcelable {
         this.idAuthor = idAuthor;
     }
 
-    public int getAssessment() {
+    public float getAssessment() {
         return assessment;
     }
 
-    public Book setAssessment(int assessment) {
+    public Book setAssessment(float assessment) {
         this.assessment = assessment;
         return this;
     }
@@ -157,7 +168,7 @@ public class Book implements Parcelable {
         dest.writeString(urlPhoto);
         dest.writeString(resume);
         dest.writeString(key);
-        dest.writeInt(assessment);
+        dest.writeFloat(assessment);
         dest.writeByte((byte) (favorite ? 1 : 0));
     }
 
@@ -176,13 +187,13 @@ public class Book implements Parcelable {
 
     public static Book fromMap(Map<String, Object> map){
         Book book = new Book();
-        book.id = (Integer) map.get("id");
-        book.idAuthor = (Integer) map.get("idAuthor");
+        book.id = (Long) map.get("id");
+        book.idAuthor = (Long) map.get("idAuthor");
         book.title = (String) map.get("title");
         book.urlPhoto = (String) map.get("urlPhoto");
         book.resume = (String) map.get("resume");
         book.key = (String) map.get("key");
-        book.assessment = (Integer) map.get("assessment");
+        book.assessment = Float.parseFloat(map.get("assessment").toString());
         book.favorite = (Boolean) map.get("favorite");
         return book;
     }

@@ -24,6 +24,8 @@ import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
 import org.izv.aad.proyecto.R;
 
+import java.util.List;
+
 public class Login extends AppCompatActivity {
     private TextView tvLogup;
     private ImageView loginlogo;
@@ -152,6 +154,11 @@ public class Login extends AppCompatActivity {
                     Intent i = new Intent(Login.this, Index.class);
                     startActivity(i);
                 }
+            }
+
+            @Override
+            public List<Book> getAllBooks(List<Book> books) {
+                return null;
             }
         };
     }

@@ -92,7 +92,7 @@ public class Author implements Parcelable {
 
     public static Author fromMap(Map<String, Object> map){
         Author author = new Author();
-        author.id = (Integer) map.get("id");
+        author.id = (Long) map.get("id");
         author.name = (String) map.get("name");
         author.key = (String) map.get("key");
         return author;
