@@ -7,6 +7,7 @@ import android.util.Log;
 
 import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
+import org.izv.aad.proyecto.Objects.DateCustom;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -18,10 +19,9 @@ public class Manager {
     private AuthorHelper authorHelper;
     private BookHelper bookHelper;
     private SQLiteDatabase bdBook, bdAuthor;
-    SimpleDateFormat format;
+    DateCustom dateCustom;
 
     public Manager(Context context){
-        format = new SimpleDateFormat("yyyy-MM-dd");
         this.authorHelper = new AuthorHelper(context);
         this.bookHelper = new BookHelper(context);
         bdAuthor = authorHelper.getWritableDatabase();
@@ -154,10 +154,8 @@ public class Manager {
             book.setFavorite(false);
         }
 
-        Log.v("XYZ", cursor.getString(posStartDate));
-
-        book.setStartDate(Date.valueOf(cursor.getString(posStartDate)));
-        book.setEndDate(Date.valueOf(cursor.getString(posEndDate)));
+        book.setStartDate(new DateCustom(cursor.getString(posStartDate), "d-m-y"));
+        book.setEndDate(new DateCustom(cursor.getString(posEndDate), "d-m-y"));
 
         return book;
     }
@@ -178,6 +176,19 @@ public class Manager {
     /*************************************************
      ********************   SELECT  ******************
      *************************************************/
+
+    public Author getAuthor(long id){
+        Author author = null;
+        String condicion = Contract.AuthorTable._ID + " = ?";
+        String[] argumentos = { id + "" };
+        Cursor cursor = getCursorAuthor(condicion, argumentos);
+
+        while(cursor.moveToNext()){
+            author = getRowAutor(cursor);
+        }
+        return author;
+
+    }
 
     public List<Book> getAllBooks(){
         List<Book> books = new ArrayList<>();
@@ -205,6 +216,10 @@ public class Manager {
         }
         return authors;
     }
+
+    /*************************************************
+     *********************   DROP  *******************
+     *************************************************/
 
     public void dropTables(){
         authorHelper.dropTable(bdAuthor);

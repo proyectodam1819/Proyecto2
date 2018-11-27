@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -73,8 +74,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         msg_error_index = findViewById(R.id.msg_error_index);
         manager = new Manager(this);
         books = new ArrayList<>();
-        Book book = new Book();
-        saveBooks(book);
+//        saveBooks(book);
         getBooks();
     }
 
@@ -105,9 +105,9 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
 
     private void initRecycler(){
         recyclerBooks = findViewById(R.id.recyclerBooks);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerBooks.setLayoutManager(mLayoutManager);
-        AdapterIndex adaptador = new AdapterIndex(this, books, new OnItemClickListener() {
+        AdapterIndex adaptador = new AdapterIndex(manager, books, new OnItemClickListener() {
             @Override
             public void onBookClickListener(Book book) {
                 //Cuando se haga click hará algo aquí
@@ -222,11 +222,11 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     private void checkRecyclerBooks(){
-        initRecycler();
         if(books.size() <= 0){
             msg_error_index.setText(getString(R.string.no_books));
             msg_error_index.setVisibility(View.VISIBLE);
         }else{
+            initRecycler();
             msg_error_index.setVisibility(View.GONE);
         }
     }

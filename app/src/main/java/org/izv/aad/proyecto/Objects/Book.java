@@ -16,16 +16,13 @@ public class Book implements Parcelable {
     private String title, urlPhoto, resume, key;
     private float assessment;
     private boolean favorite;
-    private Date startDate, endDate;
-
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private DateCustom startDate, endDate;
 
     public Book() {
-        this(0 ,0, "", "" ,"" ,"" ,0 ,false , new Date(), new Date());
+        this(0 ,0, "", "" ,"" ,"" ,0 ,false , new DateCustom(), new DateCustom());
     }
 
-    public Book(long id, long idAuthor, String key, String title, String urlPhoto, String resume, float assessment, boolean favorite, Date startDate, Date endDate) {
-        sdf = new SimpleDateFormat("yyyy-MM-dd");
+    public Book(long id, long idAuthor, String key, String title, String urlPhoto, String resume, float assessment, boolean favorite, DateCustom startDate, DateCustom endDate) {
         this.title = title;
         this.urlPhoto = urlPhoto;
         this.key = key;
@@ -34,13 +31,8 @@ public class Book implements Parcelable {
         this.idAuthor = idAuthor;
         this.assessment = assessment;
         this.favorite = favorite;
-        try {
-            this.startDate = sdf.parse(startDate.toString());
-            this.endDate = sdf.parse(endDate.toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     protected Book(Parcel in) {
@@ -52,6 +44,8 @@ public class Book implements Parcelable {
         key = in.readString();
         assessment = in.readFloat();
         favorite = in.readByte() != 0;
+        startDate = in.readParcelable(DateCustom.class.getClassLoader());
+        endDate = in.readParcelable(DateCustom.class.getClassLoader());
     }
 
     public static final Creator<Book> CREATOR = new Creator<Book>() {
@@ -136,41 +130,24 @@ public class Book implements Parcelable {
         return this;
     }
 
-    public Date getStartDate() {
+    public DateCustom getStartDate() {
         return startDate;
     }
 
-    public Book setStartDate(Date startDate) {
+    public Book setStartDate(DateCustom startDate) {
         this.startDate = startDate;
         return this;
     }
 
-    public Date getEndDate() {
+    public DateCustom getEndDate() {
         return endDate;
     }
 
-    public Book setEndDate(Date endDate) {
+    public Book setEndDate(DateCustom endDate) {
         this.endDate = endDate;
         return this;
     }
 
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id);
-        dest.writeLong(idAuthor);
-        dest.writeString(title);
-        dest.writeString(urlPhoto);
-        dest.writeString(resume);
-        dest.writeString(key);
-        dest.writeFloat(assessment);
-        dest.writeByte((byte) (favorite ? 1 : 0));
-    }
 
     public Map<String,Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
@@ -182,6 +159,8 @@ public class Book implements Parcelable {
         result.put("key", key);
         result.put("assessment", assessment);
         result.put("favorite", favorite);
+        result.put("startDate", startDate.toString());
+        result.put("endDate", startDate.toString());
         return result;
     }
 
@@ -195,6 +174,8 @@ public class Book implements Parcelable {
         book.key = (String) map.get("key");
         book.assessment = Float.parseFloat(map.get("assessment").toString());
         book.favorite = (Boolean) map.get("favorite");
+        book.startDate = new DateCustom( (String) map.get("startDate"), "d-m-y");
+        book.endDate = new DateCustom( (String) map.get("endDate"), "d-m-y");
         return book;
     }
 
@@ -212,5 +193,24 @@ public class Book implements Parcelable {
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeLong(idAuthor);
+        dest.writeString(title);
+        dest.writeString(urlPhoto);
+        dest.writeString(resume);
+        dest.writeString(key);
+        dest.writeFloat(assessment);
+        dest.writeByte((byte) (favorite ? 1 : 0));
+        dest.writeParcelable(startDate, flags);
+        dest.writeParcelable(endDate, flags);
     }
 }

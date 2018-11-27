@@ -135,6 +135,12 @@
     <string name="dateFinish">Date Finish</string>
     <string name="summary">Summary</string>
     <string name="create">Create</string>
+    <string name="Started">Started</string>
+    <string name="No_started">No started</string>
+    <string name="Ended">Ended</string>
+    <string name="cero">0</string>
+    <string name="barra">/</string>
+    <string name="favorite">Favorite</string>
 
     //Logup
     <string name="error_email_repeat">com.google.firebase.auth.FirebaseAuthUserCollisionException: The email address is already in use by another account.</string>
@@ -144,5 +150,7 @@
     <string name="title_author">Create an author</string>
     <string name="positive">Create</string>
     <string name="negative">Cancel</string>
+
+
 
 </resources>

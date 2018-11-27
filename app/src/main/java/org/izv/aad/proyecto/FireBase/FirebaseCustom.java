@@ -194,9 +194,11 @@ public class FirebaseCustom {
                 List<Book> books = new ArrayList<>();
                 if(dataSnapshot != null) {
                     Map<String, Object> items = (Map<String, Object>) dataSnapshot.getValue();
-                    for (Map.Entry<String, Object> entry : items.entrySet()) {
-                        Map mapItem = (Map) entry.getValue();
-                        books.add(Book.fromMap(mapItem));
+                    if(items != null) {
+                        for (Map.Entry<String, Object> entry : items.entrySet()) {
+                            Map mapItem = (Map) entry.getValue();
+                            books.add(Book.fromMap(mapItem));
+                        }
                     }
                 }
                 interfaceFireBase.getAllBooks(books);
