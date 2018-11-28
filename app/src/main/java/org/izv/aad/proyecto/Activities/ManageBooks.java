@@ -109,10 +109,10 @@ public class ManageBooks extends AppCompatActivity {
 
         rtBar = findViewById(R.id.book_ratingBar);
         summary = findViewById(R.id.book_summary);
-        btCreateBook=findViewById(R.id.book_createBook);
-        ch=findViewById(R.id.checkBox);
+        btCreateBook=findViewById(R.id.book_btCreateBook);
+        //ch=findViewById(R.id.book_favorite);
         iVPhoto=findViewById(R.id.book_logo);
-        rdGroup=findViewById(R.id.book_rdGroup);
+        rdGroup=findViewById(R.id.book_status);
 
         interfaceFireBase = getMethodInterface();
 

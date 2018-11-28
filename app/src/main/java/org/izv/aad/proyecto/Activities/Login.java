@@ -58,7 +58,7 @@ public class Login extends AppCompatActivity {
     private void init(){
         tvLogup = findViewById(R.id.tvLogup);
         textView5 = findViewById(R.id.textView5);
-        loginbtLogin = findViewById(R.id.login_btLogin);
+        loginbtLogin = findViewById(R.id.book_btCreateBook);
         createicoPasswordIV = findViewById(R.id.create_icoPassword);
         createpasswordLayout = findViewById(R.id.create_passwordLayout);
         loginpasswordET = findViewById(R.id.login_password);
