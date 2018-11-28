@@ -162,21 +162,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/toBegin" />
+            android:text="@string/No_started" />
 
         <RadioButton
             android:id="@+id/book_rdProgress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/inProgres" />
+            android:text="@string/Started" />
 
         <RadioButton
             android:id="@+id/book_rdFinish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/finished" />
+            android:text="@string/Ended" />
     </RadioGroup>
 
 

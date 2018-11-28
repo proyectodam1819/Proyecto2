@@ -249,6 +249,13 @@ public class ManageBooks extends AppCompatActivity {
                 favorite=ch.isChecked();
                 resume=summary.getText().toString();
                 rating=rtBar.getRating();
+
+                for(Author author: authors){
+                    if(author.getName() == sp.getSelectedItem().toString()){
+                        Log.v("XYZ", "ID " + author.getId() + "");
+                    }
+                }
+
                 cleanError();
                 if(checkTittle() && checkRadios()){
                     if(uri != null){

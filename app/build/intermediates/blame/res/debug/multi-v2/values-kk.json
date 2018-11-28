@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/dam/Desktop/Proyecto2/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-kk/values-kk.xml",
+            "outputFile": "/Users/dam/AndroidStudioProjects/Proyecto/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-kk/values-kk.xml",
             "map": [
                 {
                     "source": "/Users/dam/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/e0be1ccbfec168fe71847f40c6715f9c/res/values-kk/values-kk.xml",

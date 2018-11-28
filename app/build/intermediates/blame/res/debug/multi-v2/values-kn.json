@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/dam/Desktop/Proyecto2/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-kn/values-kn.xml",
+            "outputFile": "/Users/dam/AndroidStudioProjects/Proyecto/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-kn/values-kn.xml",
             "map": [
                 {
                     "source": "/Users/dam/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/1c953cf1e63fc4ffde01bf46cbd72814/res/values-kn/values.xml",
