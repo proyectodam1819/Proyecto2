@@ -89,6 +89,11 @@ public class Logup extends AppCompatActivity {
                 return null;
             }
 
+            @Override
+            public String getRoutePhoto(String string) {
+                return null;
+            }
+
         };
 
         fragmentLogup1 = (FragmentLogup1)getSupportFragmentManager().findFragmentById(R.id.fragmento1);

@@ -160,6 +160,11 @@ public class Login extends AppCompatActivity {
             public List<Book> getAllBooks(List<Book> books) {
                 return null;
             }
+
+            @Override
+            public String getRoutePhoto(String string) {
+                return null;
+            }
         };
     }
 

@@ -7,8 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -21,15 +23,19 @@ import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 
+import com.google.firebase.auth.FirebaseUser;
+
 import org.izv.aad.proyecto.DataBase.Manager;
 import org.izv.aad.proyecto.Dialogs.DialogCustom;
 import org.izv.aad.proyecto.FireBase.FirebaseCustom;
 import org.izv.aad.proyecto.Interfaces.CreateAuthor;
+import org.izv.aad.proyecto.Interfaces.InterfaceFireBase;
 import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
 import org.izv.aad.proyecto.Objects.DateCustom;
 import org.izv.aad.proyecto.R;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,16 +45,14 @@ import java.util.List;
 
 public class ManageBooks extends AppCompatActivity {
 
-    private Button btAddAutor;
+    private Button btAddAutor,btCreateBook;
     private CreateAuthor createAuthor;
     private Manager manager;
     private ProgressDialog progressDialog;
     private TextInputLayout ilFechIni,ilFechFin,ilTitle;
-    private EditText etFechIni,etFechFin,etTitle;
+    private EditText etFechIni,etFechFin,etTitle, summary;
     private Spinner sp;
     private RatingBar rtBar;
-    private EditText summary;
-    private Button btCreateBook;
     private List<Author> authors;
     private ImageView iVPhoto;
     private Uri uri;
@@ -61,6 +65,17 @@ public class ManageBooks extends AppCompatActivity {
     final int mes = c.get(Calendar.MONTH);
     final int dia = c.get(Calendar.DAY_OF_MONTH);
     final int anio = c.get(Calendar.YEAR);
+    InterfaceFireBase interfaceFireBase;
+
+    //Datos del libro
+    private DateCustom fechIni;
+    private DateCustom fechFin;
+    private String title;
+    private String author;
+    private Boolean favorite;
+    private String resume;
+    private Float rating;
+    private File filePhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +101,7 @@ public class ManageBooks extends AppCompatActivity {
         etFechIni = ilFechIni.getEditText();
         etFechFin = ilFechFin.getEditText();
         etTitle = ilTitle.getEditText();
+        uri = Uri.parse("asd");
 
         rtBar = findViewById(R.id.book_ratingBar);
         summary = findViewById(R.id.book_summary);
@@ -94,12 +110,53 @@ public class ManageBooks extends AppCompatActivity {
         iVPhoto=findViewById(R.id.book_logo);
         rdGroup=findViewById(R.id.book_rdGroup);
 
+        interfaceFireBase = getMethodInterface();
+
         btAddAutor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
             }
         });
+
+        setListenerFechIni();
+        setListenerFechFin();
+        setListenerBook();
+    }
+
+    private InterfaceFireBase getMethodInterface() {
+        return new InterfaceFireBase() {
+            @Override
+            public void isCorrectlyLogUp(boolean isSuccessful, String error) {
+
+            }
+
+            @Override
+            public Book getBook(Book book) {
+                return null;
+            }
+
+            @Override
+            public Author getAuthor(Author author) {
+                return null;
+            }
+
+            @Override
+            public void getUserLogin(FirebaseUser user, String error) {
+
+            }
+
+            @Override
+            public List<Book> getAllBooks(List<Book> books) {
+                return null;
+            }
+
+            @Override
+            public String getRoutePhoto(String string) {
+                createBook(string);
+                return null;
+            }
+        };
     }
 
     private void setListenerFoto() {
@@ -109,7 +166,6 @@ public class ManageBooks extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/*");
                 startActivityForResult(intent, READ_REQUEST_CODE);
-
             }
         });
     }
@@ -168,21 +224,25 @@ public class ManageBooks extends AppCompatActivity {
         btCreateBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DateCustom fechIni;
-                DateCustom fechFin;
 
-                String title=etTitle.getText().toString();
-                String author=sp.getSelectedItem().toString();
+
+                title = etTitle.getText().toString();
+                author = sp.getSelectedItem().toString();
 
                 fechIni = new DateCustom().setDate(etFechIni.getText().toString(), "d-m-y", getString(R.string.barra));
                 fechFin = new DateCustom().setDate(etFechFin.getText().toString(), "d-m-y", getString(R.string.barra));
 
-                Boolean favorite=ch.isChecked();
-                String resume=summary.getText().toString();
-                Float rating=rtBar.getRating();
+                favorite=ch.isChecked();
+                resume=summary.getText().toString();
+                rating=rtBar.getRating();
                 cleanError();
                 if(checkTittle() && checkRadios()){
-                    Book book=new Book(0,0,"ss",title,uri.toString(),resume,rating,favorite,fechIni,fechFin);
+
+                    if(filePhoto != null){
+                        FirebaseCustom.sendPhoto(filePhoto, interfaceFireBase);
+                    }
+
+
                 }
 
             }
@@ -245,9 +305,7 @@ public class ManageBooks extends AppCompatActivity {
                 String reformatMonth = (actualMonth < 10) ? getString(R.string.cero) + String.valueOf(actualMonth) : String.valueOf(actualMonth);
                 //Muestro la fecha con el formato deseado
                 editText.setText(reformatDay + getString(R.string.barra) + reformatMonth + getString(R.string.barra) + year);
-
             }
-
         }, anio, mes, dia);
         recogerFecha.show();
     }
@@ -290,6 +348,16 @@ public class ManageBooks extends AppCompatActivity {
         adaptadorSpiner.notifyDataSetChanged();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == RESULT_OK && resultCode == READ_REQUEST_CODE){
+            Uri uri = data.getData();
+            filePhoto = new File(uri.toString());
+        }
+    }
 
-
+    private void createBook(String photo){
+        Book book=new Book(0,0,"ss",title,uri.toString(),resume,rating,favorite,fechIni,fechFin);
+        Log.v("XTZ", book.toString());
+    }
 }

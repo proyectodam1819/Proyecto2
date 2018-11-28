@@ -268,6 +268,11 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
                 }
                 return books;
             }
+
+            @Override
+            public String getRoutePhoto(String string) {
+                return null;
+            }
         };
     }
 

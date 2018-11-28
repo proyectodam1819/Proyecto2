@@ -1,10 +1,13 @@
 package org.izv.aad.proyecto.FireBase;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,6 +18,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.izv.aad.proyecto.Interfaces.InterfaceFireBase;
 import org.izv.aad.proyecto.Objects.Author;
@@ -22,6 +28,7 @@ import org.izv.aad.proyecto.Objects.Book;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +37,7 @@ import java.util.Map;
 public class FirebaseCustom {
 
     private static FirebaseUser user = null;
+    private static StorageReference storage = FirebaseStorage.getInstance().getReference();
 
     private static String getRouteBook(String key){
         if(key == null){
@@ -207,6 +215,39 @@ public class FirebaseCustom {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+    }
+
+    public static void sendPhoto(File file, final InterfaceFireBase interfaceFireBase){
+        Uri uri = Uri.fromFile(file);
+        StorageReference riversRef = storage.child(getUser().getUid() + "/" + uri);
+
+        riversRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                Uri downloadUrl = taskSnapshot.getUploadSessionUri();
+                interfaceFireBase.getRoutePhoto(downloadUrl.toString());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                interfaceFireBase.getRoutePhoto(null);
+            }
+        });
+    }
+
+    public static void getPgoto(){
+        storage.child("users/me/profile.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                // Got the download URL for 'users/me/profile.png'
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
             }
         });
     }
