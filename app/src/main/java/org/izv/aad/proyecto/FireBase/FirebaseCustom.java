@@ -2,6 +2,7 @@ package org.izv.aad.proyecto.FireBase;
 
 import android.app.Activity;
 import android.net.Uri;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -25,10 +26,10 @@ import com.google.firebase.storage.UploadTask;
 import org.izv.aad.proyecto.Interfaces.InterfaceFireBase;
 import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -219,16 +220,34 @@ public class FirebaseCustom {
         });
     }
 
-    public static void sendPhoto(File file, final InterfaceFireBase interfaceFireBase){
-        Uri uri = Uri.fromFile(file);
-        StorageReference riversRef = storage.child(getUser().getUid() + "/" + uri);
+    public static void sendPhoto(Uri uri, final InterfaceFireBase interfaceFireBase){
+        StorageReference image = storage.child(getUser().getUid() + "/" + generateRandomText());
+        UploadTask uploadTask = image.putFile(uri);
 
-        riversRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
                 Uri downloadUrl = taskSnapshot.getUploadSessionUri();
-                interfaceFireBase.getRoutePhoto(downloadUrl.toString());
+                interfaceFireBase.sendRoutePhoto(downloadUrl.toString());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                interfaceFireBase.sendRoutePhoto(null);
+            }
+        });
+    }
+
+    public static void getPhoto(String url, final InterfaceFireBase interfaceFireBase){
+
+        if( url == null || url.isEmpty() ){
+            url = "defaultBook.png";
+        }
+
+        storage.child(url).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                interfaceFireBase.getRoutePhoto(uri.toString());
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -238,19 +257,10 @@ public class FirebaseCustom {
         });
     }
 
-    public static void getPgoto(){
-        storage.child("users/me/profile.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                // Got the download URL for 'users/me/profile.png'
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });
+    private static String generateRandomText() {
+        SecureRandom random = new SecureRandom();
+        String text = new BigInteger(130, random).toString(32);
+        return text;
     }
-
 
 }

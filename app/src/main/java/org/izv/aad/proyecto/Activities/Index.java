@@ -270,6 +270,11 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
             }
 
             @Override
+            public String sendRoutePhoto(String string) {
+                return null;
+            }
+
+            @Override
             public String getRoutePhoto(String string) {
                 return null;
             }

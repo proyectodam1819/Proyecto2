@@ -19,5 +19,7 @@ public interface InterfaceFireBase {
 
     List<Book> getAllBooks(List<Book> books);
 
+    String sendRoutePhoto(String string);
+
     String getRoutePhoto(String string);
 }

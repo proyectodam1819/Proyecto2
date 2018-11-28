@@ -90,6 +90,11 @@ public class Logup extends AppCompatActivity {
             }
 
             @Override
+            public String sendRoutePhoto(String string) {
+                return null;
+            }
+
+            @Override
             public String getRoutePhoto(String string) {
                 return null;
             }

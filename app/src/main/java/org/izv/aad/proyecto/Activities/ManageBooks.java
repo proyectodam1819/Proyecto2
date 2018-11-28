@@ -5,10 +5,13 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.content.CursorLoader;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +19,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CursorAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,6 +28,7 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import org.izv.aad.proyecto.DataBase.Manager;
 import org.izv.aad.proyecto.Dialogs.DialogCustom;
@@ -75,7 +80,6 @@ public class ManageBooks extends AppCompatActivity {
     private Boolean favorite;
     private String resume;
     private Float rating;
-    private File filePhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +123,7 @@ public class ManageBooks extends AppCompatActivity {
             }
         });
 
+        setListenerFoto();
         setListenerFechIni();
         setListenerFechFin();
         setListenerBook();
@@ -152,9 +157,20 @@ public class ManageBooks extends AppCompatActivity {
             }
 
             @Override
+            public String sendRoutePhoto(String string) {
+                Log.v("XYZ", "image " + string);
+                if(string != null) {
+                    createBook(string);
+                }else{
+                    getRoutePhoto(null);
+                }
+                return null;
+            }
+
+            @Override
             public String getRoutePhoto(String string) {
                 createBook(string);
-                return null;
+                return string;
             }
         };
     }
@@ -224,8 +240,6 @@ public class ManageBooks extends AppCompatActivity {
         btCreateBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 title = etTitle.getText().toString();
                 author = sp.getSelectedItem().toString();
 
@@ -237,12 +251,11 @@ public class ManageBooks extends AppCompatActivity {
                 rating=rtBar.getRating();
                 cleanError();
                 if(checkTittle() && checkRadios()){
-
-                    if(filePhoto != null){
-                        FirebaseCustom.sendPhoto(filePhoto, interfaceFireBase);
+                    if(uri != null){
+                        FirebaseCustom.sendPhoto(uri, interfaceFireBase);
+                    }else{
+                        FirebaseCustom.getPhoto(null, interfaceFireBase);
                     }
-
-
                 }
 
             }
@@ -350,14 +363,17 @@ public class ManageBooks extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == RESULT_OK && resultCode == READ_REQUEST_CODE){
-            Uri uri = data.getData();
-            filePhoto = new File(uri.toString());
+        if(requestCode == READ_REQUEST_CODE && resultCode == RESULT_OK){
+            if (data != null) {
+                uri = data.getData();
+                Picasso.with(this).load(uri).into(iVPhoto);
+            }
         }
     }
 
     private void createBook(String photo){
-        Book book=new Book(0,0,"ss",title,uri.toString(),resume,rating,favorite,fechIni,fechFin);
-        Log.v("XTZ", book.toString());
+        Book book = new Book(0,0,"ss", title, photo, resume, rating, favorite, fechIni, fechFin);
+        Log.v("XTZ", "book " + book.toString());
     }
+
 }
