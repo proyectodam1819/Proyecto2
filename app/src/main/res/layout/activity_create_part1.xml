@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
 
     <ImageView
@@ -11,7 +12,7 @@
         android:layout_height="150dp"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:scaleType="centerCrop"
@@ -28,7 +29,7 @@
         android:layout_marginLeft="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/book_TitleLayout"
-        app:srcCompat="@drawable/password" />
+        app:srcCompat="@drawable/book" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/book_TitleLayout"
@@ -61,7 +62,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/book_icoTitle"
-        app:srcCompat="@drawable/password" />
+        app:srcCompat="@drawable/author" />
 
     <Spinner
         android:id="@+id/book_writter"
@@ -95,7 +96,7 @@
         android:layout_marginTop="45dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/book_icoWritter"
-        app:srcCompat="@drawable/password" />
+        app:srcCompat="@drawable/date" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/book_dateStartLayout"
@@ -131,30 +132,52 @@
             android:inputType="date" />
     </android.support.design.widget.TextInputLayout>
 
-    <ImageView
-        android:id="@+id/book_icoState"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+    <TextView
+        android:id="@+id/book_tvState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="45dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/state2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/book_icoDate"
-        app:srcCompat="@drawable/password" />
+        app:layout_constraintTop_toBottomOf="@+id/book_icoDate" />
 
-    <Spinner
-        android:id="@+id/book_spState"
+    <RadioGroup
+        android:id="@+id/book_status"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="48dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/book_icoState"
-        app:layout_constraintTop_toBottomOf="@+id/book_dateStartLayout" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/book_tvState">
+
+        <RadioButton
+            android:id="@+id/book_rdStarted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/toBegin" />
+
+        <RadioButton
+            android:id="@+id/book_rdProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/inProgres" />
+
+        <RadioButton
+            android:id="@+id/book_rdFinish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/finished" />
+    </RadioGroup>
 
 
 </android.support.constraint.ConstraintLayout>

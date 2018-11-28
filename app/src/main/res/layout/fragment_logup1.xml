@@ -21,19 +21,20 @@
 
     <ImageView
         android:id="@+id/create_icoMail"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/create_mailLayout" />
+        app:layout_constraintTop_toTopOf="@+id/create_mailLayout"
+        app:srcCompat="@drawable/email" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/create_mailLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"

@@ -25,8 +25,8 @@
         android:id="@+id/create_mailLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
@@ -44,20 +44,20 @@
 
     <ImageView
         android:id="@+id/create_icoMail"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/create_mailLayout"
-        />
+        app:srcCompat="@drawable/email" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/create_passwordLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
@@ -77,15 +77,16 @@
 
     <ImageView
         android:id="@+id/create_icoPassword"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/create_passwordLayout" />
+        app:layout_constraintTop_toTopOf="@+id/create_passwordLayout"
+        app:srcCompat="@drawable/password" />
 
     <Button
-        android:id="@+id/login_btLogin"
+        android:id="@+id/book_btCreateBook"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="100dp"
@@ -112,7 +113,7 @@
         android:text="@string/forgotPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_btLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/book_btCreateBook" />
 
     <TextView
         android:id="@+id/textView"
@@ -148,7 +149,7 @@
 
     <CheckBox
         android:id="@+id/create_checkRemember"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -157,7 +158,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/checkbox_remember"
-        app:layout_constraintBottom_toTopOf="@+id/login_btLogin"
+        app:layout_constraintBottom_toTopOf="@+id/book_btCreateBook"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/create_passwordLayout" />

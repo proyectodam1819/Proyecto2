@@ -133,7 +133,7 @@ public class Logup extends AppCompatActivity {
                         create_passwordLayout.setError(getString(R.string.not_empty));
                     }
                     if (create_repitePassword.getText().toString().equals("")) {
-                        create_repitePasswordLayout.setError(getString(R.string.not_empty));
+                       create_repitePasswordLayout.setError(getString(R.string.not_empty));
                     }
                 }else if(!create_repitePassword.getText().toString().equals(create_password.getText().toString())){
                     create_repitePasswordLayout.setError(getString(R.string.not_equals));
