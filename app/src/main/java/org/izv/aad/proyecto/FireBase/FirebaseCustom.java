@@ -240,7 +240,7 @@ public class FirebaseCustom {
 
     public static void getPhoto(String url, final InterfaceFireBase interfaceFireBase){
 
-        if( url == null || url.isEmpty() ){
+        if( url == null || url.isEmpty() || url.equals("null") ){
             url = "defaultBook.png";
         }
 

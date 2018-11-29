@@ -66,14 +66,16 @@ public class DateCustom implements Parcelable {
         String day = "00";
         String month = "00";
         String year = "00";
-        if(format.equals("d-m-y")){
-            day = dates[0];
-            month = dates[1];
-            year = dates[2];
-        }else{
-            day = dates[2];
-            month = dates[1];
-            year = dates[0];
+        if(!date.isEmpty()) {
+            if (format.equals("d-m-y")) {
+                day = dates[0];
+                month = dates[1];
+                year = dates[2];
+            } else {
+                day = dates[2];
+                month = dates[1];
+                year = dates[0];
+            }
         }
         this.day = day;
         this.month = month;
@@ -100,6 +102,18 @@ public class DateCustom implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public String getYear() {
+        return year;
     }
 
     @Override

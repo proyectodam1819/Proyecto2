@@ -100,10 +100,13 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/book_dateStartLayout"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/book_dateFinishLayout"
         app:layout_constraintStart_toEndOf="@+id/book_icoDate"
         app:layout_constraintTop_toTopOf="@+id/book_icoDate">
 
@@ -111,16 +114,20 @@
             android:id="@+id/book_dateStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
             android:hint="@string/dateStart"
             android:inputType="date" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/book_dateFinishLayout"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/book_dateStartLayout"
         app:layout_constraintTop_toTopOf="@+id/book_dateStartLayout">
 
@@ -128,6 +135,7 @@
             android:id="@+id/book_dateFinish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
             android:hint="@string/dateFinish"
             android:inputType="date" />
     </android.support.design.widget.TextInputLayout>
@@ -158,14 +166,14 @@
         app:layout_constraintTop_toBottomOf="@+id/book_tvState">
 
         <RadioButton
-            android:id="@+id/book_rdStarted"
+            android:id="@+id/book_rdNoStarted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/No_started" />
 
         <RadioButton
-            android:id="@+id/book_rdProgress"
+            android:id="@+id/book_rdStarted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -179,5 +187,16 @@
             android:text="@string/Ended" />
     </RadioGroup>
 
+    <ImageView
+        android:id="@+id/ivFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="135dp"
+        android:layout_marginLeft="135dp"
+        android:layout_marginTop="135dp"
+        app:layout_constraintBottom_toBottomOf="@+id/book_logo"
+        app:layout_constraintStart_toStartOf="@+id/book_logo"
+        app:layout_constraintTop_toTopOf="@+id/book_logo"
+        app:srcCompat="@android:drawable/btn_star_big_off" />
 
 </android.support.constraint.ConstraintLayout>

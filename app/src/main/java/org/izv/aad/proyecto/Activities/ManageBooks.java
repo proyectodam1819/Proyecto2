@@ -5,27 +5,23 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.CursorLoader;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CursorAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
@@ -40,12 +36,8 @@ import org.izv.aad.proyecto.Objects.Book;
 import org.izv.aad.proyecto.Objects.DateCustom;
 import org.izv.aad.proyecto.R;
 
-import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class ManageBooks extends AppCompatActivity {
@@ -59,27 +51,26 @@ public class ManageBooks extends AppCompatActivity {
     private Spinner sp;
     private RatingBar rtBar;
     private List<Author> authors;
-    private ImageView iVPhoto;
+    private ImageView iVPhoto, ivFavorite;
     private Uri uri;
-    private CheckBox ch;
     private RadioGroup rdGroup;
     private ArrayList<String> authorsString;
     private ArrayAdapter<String> adaptadorSpiner;
     private static final int READ_REQUEST_CODE = 1;
-    public final Calendar c = Calendar.getInstance();
-    final int mes = c.get(Calendar.MONTH);
-    final int dia = c.get(Calendar.DAY_OF_MONTH);
-    final int anio = c.get(Calendar.YEAR);
-    InterfaceFireBase interfaceFireBase;
+    private final Calendar c = Calendar.getInstance();
+    private final int dia = c.get(Calendar.DAY_OF_MONTH);
+    private final int mes = c.get(Calendar.MONTH);
+    private final int anio = c.get(Calendar.YEAR);
+    private InterfaceFireBase interfaceFireBase;
 
     //Datos del libro
     private DateCustom fechIni;
     private DateCustom fechFin;
     private String title;
-    private String author;
-    private Boolean favorite;
+    private Boolean favorite = false;
     private String resume;
     private Float rating;
+    private Author authorSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,18 +90,18 @@ public class ManageBooks extends AppCompatActivity {
 
         createAuthor = methodInterface();
 
+        ivFavorite = findViewById(R.id.ivFavorite);
         ilFechFin = findViewById(R.id.book_dateFinishLayout);
         ilFechIni = findViewById(R.id.book_dateStartLayout);
         ilTitle = findViewById(R.id.book_TitleLayout);
         etFechIni = ilFechIni.getEditText();
         etFechFin = ilFechFin.getEditText();
         etTitle = ilTitle.getEditText();
-        uri = Uri.parse("asd");
+        uri = Uri.parse("");
 
         rtBar = findViewById(R.id.book_ratingBar);
         summary = findViewById(R.id.book_summary);
         btCreateBook=findViewById(R.id.book_btCreateBook);
-        //ch=findViewById(R.id.book_favorite);
         iVPhoto=findViewById(R.id.book_logo);
         rdGroup=findViewById(R.id.book_status);
 
@@ -127,14 +118,13 @@ public class ManageBooks extends AppCompatActivity {
         setListenerFechIni();
         setListenerFechFin();
         setListenerBook();
+        setListenerFavorite();
     }
 
     private InterfaceFireBase getMethodInterface() {
         return new InterfaceFireBase() {
             @Override
-            public void isCorrectlyLogUp(boolean isSuccessful, String error) {
-
-            }
+            public void isCorrectlyLogUp(boolean isSuccessful, String error) {}
 
             @Override
             public Book getBook(Book book) {
@@ -147,9 +137,7 @@ public class ManageBooks extends AppCompatActivity {
             }
 
             @Override
-            public void getUserLogin(FirebaseUser user, String error) {
-
-            }
+            public void getUserLogin(FirebaseUser user, String error) {}
 
             @Override
             public List<Book> getAllBooks(List<Book> books) {
@@ -158,11 +146,10 @@ public class ManageBooks extends AppCompatActivity {
 
             @Override
             public String sendRoutePhoto(String string) {
-                Log.v("XYZ", "image " + string);
-                if(string != null) {
+                if(string != null && !string.equals("null")) {
                     createBook(string);
                 }else{
-                    getRoutePhoto(null);
+                    FirebaseCustom.getPhoto(null, interfaceFireBase);
                 }
                 return null;
             }
@@ -241,26 +228,24 @@ public class ManageBooks extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 title = etTitle.getText().toString();
-                author = sp.getSelectedItem().toString();
 
                 fechIni = new DateCustom().setDate(etFechIni.getText().toString(), "d-m-y", getString(R.string.barra));
                 fechFin = new DateCustom().setDate(etFechFin.getText().toString(), "d-m-y", getString(R.string.barra));
 
-                favorite=ch.isChecked();
                 resume=summary.getText().toString();
                 rating=rtBar.getRating();
 
                 for(Author author: authors){
                     if(author.getName() == sp.getSelectedItem().toString()){
-                        Log.v("XYZ", "ID " + author.getId() + "");
+                        authorSelected = author;
+                        break;
                     }
                 }
 
-                cleanError();
-                if(checkTittle() && checkRadios()){
-                    if(uri != null){
+                if (checkNotEmptyText(ilTitle) && checkRadios()) {
+                    if (uri != null) {
                         FirebaseCustom.sendPhoto(uri, interfaceFireBase);
-                    }else{
+                    } else {
                         FirebaseCustom.getPhoto(null, interfaceFireBase);
                     }
                 }
@@ -269,10 +254,11 @@ public class ManageBooks extends AppCompatActivity {
         });
     }
 
-    private  boolean checkTittle(){
+    private  boolean checkNotEmptyText(TextInputLayout element){
         boolean correct=true;
-        if(etTitle.getText().toString().isEmpty()){
-            ilTitle.setError(getString(R.string.not_empty));
+        element.setError(null);
+        if(element. getEditText().getText().toString().isEmpty()){
+            element.setError(getString(R.string.not_empty));
             correct=false;
         }
         return correct;
@@ -282,38 +268,22 @@ public class ManageBooks extends AppCompatActivity {
         boolean correct=false;
         switch (rdGroup.getCheckedRadioButtonId()){
             case R.id.book_rdStarted:
-                if(etFechIni.getText().toString().isEmpty()){
-                    ilFechIni.setError(getString(R.string.not_empty));
-                }else{
-                    correct=true;
+                if(checkNotEmptyText(ilFechIni)) {
+                    correct = true;
                 }
+                break;
             case R.id.book_rdFinish:
-                if(etFechIni.getText().toString().isEmpty()
-                        || etFechFin.getText().toString().isEmpty()) {
-
-                    if (etFechIni.getText().toString().isEmpty()) {
-                        ilFechIni.setError(getString(R.string.not_empty));
-                    }
-                    if (etFechFin.getText().toString().isEmpty()) {
-                        ilFechFin.setError(getString(R.string.not_empty));
-                    }
-                }else{
+                if(checkNotEmptyText(ilFechIni) && checkNotEmptyText(ilFechFin) && compareDates(fechIni, fechFin)){
                     correct=true;
                 }
+                break;
             default:
                 correct=true;
         }
         return correct;
     }
 
-    private void cleanError(){
-        ilFechIni.setError(null);
-        ilFechIni.setError(null);
-        ilFechFin.setError(null);
-    }
-
     private void fechClick(Context context, final EditText editText) {
-
         DatePickerDialog recogerFecha = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -379,8 +349,57 @@ public class ManageBooks extends AppCompatActivity {
     }
 
     private void createBook(String photo){
-        Book book = new Book(0,0,"ss", title, photo, resume, rating, favorite, fechIni, fechFin);
-        Log.v("XTZ", "book " + book.toString());
+        if(authorSelected == null){
+            CharSequence mensaje = getString(R.string.not_author);
+            Context context = getApplicationContext();
+            int duration = Toast.LENGTH_SHORT;
+            Toast.makeText(context, mensaje, duration).show();
+        }else {
+            Book book = new Book(0, authorSelected.getId(), "", title, photo, resume, rating, favorite, fechIni, fechFin);
+            Intent intent = new Intent();
+            intent.putExtra("book", book);
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+    }
+
+    private void setListenerFavorite(){
+        ivFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(favorite==false){
+                    ivFavorite.setImageResource(android.R.drawable.btn_star_big_on);
+                    favorite=true;
+                }
+                else{
+                    ivFavorite.setImageResource(android.R.drawable.btn_star_big_off);
+                    favorite=false;
+                }
+
+            }
+        });
+    }
+
+    private boolean compareDates(DateCustom fechIni, DateCustom fechFin) {
+        boolean correct = true;
+        ilFechFin.setError(null);
+        if (Integer.parseInt(fechIni.getYear()) > Integer.parseInt(fechFin.getYear())) {
+            correct = false;
+            ilFechFin.setError(getString(R.string.fechFinishLess));
+        }else if (Integer.parseInt(fechIni.getYear()) == Integer.parseInt(fechFin.getYear())) {
+            if (Integer.parseInt(fechIni.getMonth()) > Integer.parseInt(fechFin.getMonth())) {
+                correct = false;
+                ilFechFin.setError(getString(R.string.fechFinishLess));
+            }else if (Integer.parseInt(fechIni.getMonth()) == Integer.parseInt(fechFin.getMonth())) {
+                if (Integer.parseInt(fechIni.getDay()) > Integer.parseInt(fechFin.getDay())) {
+                    correct = false;
+                    ilFechFin.setError(getString(R.string.fechFinishLess));
+                }
+            }
+
+        }
+
+        return correct;
     }
 
 }

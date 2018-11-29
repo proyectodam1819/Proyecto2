@@ -142,6 +142,8 @@
     <string name="barra">/</string>
     <string name="favorite">Favorite</string>
     <string name="rating">Rating</string>
+    <string name="not_author">You must select an author</string>
+    <string name="fechFinishLess">The finish date is smaller than the start date</string>
 
     //Logup
     <string name="error_email_repeat">com.google.firebase.auth.FirebaseAuthUserCollisionException: The email address is already in use by another account.</string>
@@ -153,5 +155,11 @@
     <string name="positive">Create</string>
     <string name="negative">Cancel</string>
 
+
+    <!-- ARREGLAR -->
+    <string name="author2"></string>
+    <string name="dateStart2"></string>
+    <string name="dateFinish2"></string>
+    <string name="state2"></string>
 
 </resources>

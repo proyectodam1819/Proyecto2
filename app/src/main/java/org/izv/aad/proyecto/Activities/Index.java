@@ -5,10 +5,12 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -48,6 +50,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     private TextView msg_error_index;
     private InterfaceFireBase interfaceFireBase;
     private ImageView index_imageUser;
+    private AdapterIndex adapterIndex;
 
     public static int CODE_RESULT_MANAGEBOOKS_CREATE = 100;
 
@@ -74,7 +77,6 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         msg_error_index = findViewById(R.id.msg_error_index);
         manager = new Manager(this);
         books = new ArrayList<>();
-//        saveBooks(book);
         getBooks();
     }
 
@@ -107,16 +109,16 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         recyclerBooks = findViewById(R.id.recyclerBooks);
         LinearLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerBooks.setLayoutManager(mLayoutManager);
-        AdapterIndex adaptador = new AdapterIndex(manager, books, new OnItemClickListener() {
+        adapterIndex = new AdapterIndex(this, manager, books, new OnItemClickListener() {
             @Override
             public void onBookClickListener(Book book) {
                 //Cuando se haga click hará algo aquí
                 Intent manageBooks = new Intent(Index.this, ShowBook.class);
-                manageBooks.putExtra("book",book);
+                manageBooks.putExtra("book", book);
                 startActivity(manageBooks);
             }
         });
-        recyclerBooks.setAdapter(adaptador);
+        recyclerBooks.setAdapter(adapterIndex);
     }
 
     @Override
@@ -226,8 +228,8 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
             msg_error_index.setText(getString(R.string.no_books));
             msg_error_index.setVisibility(View.VISIBLE);
         }else{
-            initRecycler();
             msg_error_index.setVisibility(View.GONE);
+            initRecycler();
         }
     }
 
@@ -264,7 +266,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
             @Override
             public List<Book> getAllBooks(List<Book> books) {
                 for(Book book : books){
-                    saveBooks(book);
+                    //saveBooks(book);
                 }
                 return books;
             }
@@ -315,6 +317,17 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         }
     }
 
-
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(resultCode == RESULT_OK && requestCode == CODE_RESULT_MANAGEBOOKS_CREATE){
+            Book book = data.getParcelableExtra("book");
+            books.add(book);
+            saveBooks(book);
+            if(adapterIndex == null) {
+                initRecycler();
+            }
+            adapterIndex.notifyDataSetChanged();
+            checkRecyclerBooks();
+        }
+    }
 }
