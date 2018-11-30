@@ -1,15 +1,33 @@
 package org.izv.aad.proyecto.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import org.izv.aad.proyecto.DataBase.Manager;
+import org.izv.aad.proyecto.Objects.Author;
+import org.izv.aad.proyecto.Objects.Book;
 import org.izv.aad.proyecto.R;
 
 public class ShowBook extends AppCompatActivity {
+
+    private TextView show_author, show_dateStart, show_dateFinish, show_state;
+    private EditText show_status;
+    private ImageView show_logo, show_favStar;
+    private Book book;
+    private Author author;
+    private RatingBar show_rating;
+    private String status_book, dateStart, dateEnd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +35,64 @@ public class ShowBook extends AppCompatActivity {
         setContentView(R.layout.activity_show_book);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        init();
+    }
 
+    private void init(){
+        getIntentBook();
+        show_author = findViewById(R.id.show_author);
+        show_dateStart = findViewById(R.id.show_dateStart);
+        show_dateFinish = findViewById(R.id.show_dateFinish);
+        show_state = findViewById(R.id.show_state);
+        show_status = findViewById(R.id.show_status);
+        show_rating = findViewById(R.id.show_rating);
+        show_logo = findViewById(R.id.show_logo);
+        show_favStar = findViewById(R.id.show_favStar);
+        setValues();
+    }
+
+    private void getIntentBook(){
+        Intent intent = getIntent();
+        book = intent.getParcelableExtra("book");
+    }
+
+    private void getAuthor(){
+        Manager manager = new Manager(this);
+        author = manager.getAuthor(book.getIdAuthor());
+    }
+
+    private void setValues(){
+        getAuthor();
+        checkDates();
+        show_author.setText(author.getName());
+        show_dateStart.setText(dateStart);
+        show_dateFinish.setText(dateEnd);
+        show_state.setText(status_book);
+        show_status.setText(book.getResume());
+        show_rating.setRating(book.getAssessment());
+        if(book.isFavorite()){
+            show_favStar.setVisibility(View.VISIBLE);
+        }
+        Picasso.with(this).load(book.getUrlPhoto()).into(show_logo);
+    }
+
+    private void checkDates(){
+        String vacio = "00-00-00";
+        status_book = getString(R.string.No_started);
+        dateStart = book.getStartDate().getDate();
+        dateEnd = book.getEndDate().getDate();
+        if(!dateStart.equals(vacio) && !dateEnd.equals(vacio)){
+            //Empezado y acabado
+            status_book = getString(R.string.Ended);
+        }else{
+            if(dateEnd.equals(vacio) && !dateStart.equals(vacio)){
+                //Empezado
+                dateEnd = "";
+                status_book = getString(R.string.Started);
+            }else{
+                dateStart = "";
+                dateEnd = "";
+            }
+        }
     }
 }
