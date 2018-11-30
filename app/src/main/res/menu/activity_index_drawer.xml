@@ -8,37 +8,36 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/home"
-            android:title="Home" />
+            android:title="@string/home" />
         <item
             android:id="@+id/nav_createBook"
             android:icon="@drawable/new_book"
-            android:title="Create Book" />
+            android:title="@string/createBook" />
         <item
             android:id="@+id/nav_AuthorList"
             android:icon="@drawable/writter"
-            android:title="Author List" />
+            android:title="@string/authorList" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/helpers">
         <menu>
             <item
                 android:id="@+id/nav_settings"
                 android:icon="@drawable/settings"
-                android:title="Share" />
+                android:title="@string/settings" />
             <item
                 android:id="@+id/nav_help"
                 android:icon="@drawable/help"
-                android:title="Help" />
+                android:title="@string/help" />
+            <item
+                android:id="@+id/nav_darkmode"
+                android:icon="@drawable/darkmode"
+                android:title="@string/changeTheme" />
+            <item
+                android:id="@+id/nav_signout"
+                android:icon="@drawable/author"
+                android:title="@string/logout" />
         </menu>
     </item>
-
-    <item
-        android:id="@+id/nav_darkmode"
-        android:icon="@drawable/darkmode"
-        android:title="Change Theme" />
-    <item
-        android:id="@+id/nav_signout"
-        android:icon="@drawable/author"
-        android:title="Sign Out" />
 
 </menu>

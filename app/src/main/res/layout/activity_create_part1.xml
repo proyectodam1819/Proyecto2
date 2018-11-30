@@ -62,7 +62,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/book_icoTitle"
-        app:srcCompat="@drawable/author" />
+        app:srcCompat="@drawable/writter" />
 
     <Spinner
         android:id="@+id/book_writter"
