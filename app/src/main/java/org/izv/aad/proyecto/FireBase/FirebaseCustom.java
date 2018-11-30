@@ -221,14 +221,15 @@ public class FirebaseCustom {
     }
 
     public static void sendPhoto(Uri uri, final InterfaceFireBase interfaceFireBase){
-        StorageReference image = storage.child(getUser().getUid() + "/" + generateRandomText());
+        final String url = getUser().getUid() + "/" + generateRandomText();
+        StorageReference image = storage.child(url);
         UploadTask uploadTask = image.putFile(uri);
 
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Uri downloadUrl = taskSnapshot.getUploadSessionUri();
-                interfaceFireBase.sendRoutePhoto(downloadUrl.toString());
+                interfaceFireBase.sendRoutePhoto(url);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

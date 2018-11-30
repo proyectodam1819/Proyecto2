@@ -147,7 +147,7 @@ public class ManageBooks extends AppCompatActivity {
             @Override
             public String sendRoutePhoto(String string) {
                 if(string != null && !string.equals("null")) {
-                    createBook(string);
+                    FirebaseCustom.getPhoto(string, interfaceFireBase);
                 }else{
                     FirebaseCustom.getPhoto(null, interfaceFireBase);
                 }

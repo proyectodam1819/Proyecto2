@@ -73,8 +73,7 @@ public class AdapterIndex extends RecyclerView.Adapter <AdapterIndex.MyViewHolde
 
             @Override
             public String getRoutePhoto(String string) {
-                Log.v("XYZ", " IMAGEN "+ string);
-                return null;
+                return string;
             }
         };
     }
@@ -103,13 +102,14 @@ public class AdapterIndex extends RecyclerView.Adapter <AdapterIndex.MyViewHolde
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView item_title, item_author;
-        ImageView item_photo;
+        ImageView item_photo, item_start;
 
         public MyViewHolder(@NonNull final View itemView) {
             super(itemView);
             this.item_title = itemView.findViewById(R.id.item_title);
             this.item_author = itemView.findViewById(R.id.item_author);
             this.item_photo = itemView.findViewById(R.id.item_photo);
+            this.item_start = itemView.findViewById(R.id.item_start);
         }
 
         public void bind(final Book book, final OnItemClickListener listener) {
@@ -131,6 +131,10 @@ public class AdapterIndex extends RecyclerView.Adapter <AdapterIndex.MyViewHolde
             FirebaseCustom.getPhoto(book.getUrlPhoto(), interfaceFireBase);
 
             Picasso.with(context).load(book.getUrlPhoto()).into(item_photo);
+
+            if(book.isFavorite()){
+                item_start.setVisibility(View.VISIBLE);
+            }
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {

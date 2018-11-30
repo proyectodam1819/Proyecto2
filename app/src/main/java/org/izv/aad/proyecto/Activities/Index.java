@@ -85,7 +85,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent manageBooks = new Intent(Index.this,ManageBooks.class);
+                Intent manageBooks = new Intent(Index.this, ManageBooks.class);
                 startActivityForResult(manageBooks, CODE_RESULT_MANAGEBOOKS_CREATE);
             }
         });
