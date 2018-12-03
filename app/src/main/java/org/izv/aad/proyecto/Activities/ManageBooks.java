@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -18,6 +17,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.Spinner;
@@ -63,6 +63,9 @@ public class ManageBooks extends AppCompatActivity {
     private final int anio = c.get(Calendar.YEAR);
     private InterfaceFireBase interfaceFireBase;
 
+    private RadioButton rdFinish;
+    private RadioButton rdStarted;
+
     //Datos del libro
     private DateCustom fechIni;
     private DateCustom fechFin;
@@ -71,6 +74,9 @@ public class ManageBooks extends AppCompatActivity {
     private String resume;
     private Float rating;
     private Author authorSelected;
+
+    //Recoger libro (editar)
+    private Book bookEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +103,8 @@ public class ManageBooks extends AppCompatActivity {
         etFechIni = ilFechIni.getEditText();
         etFechFin = ilFechFin.getEditText();
         etTitle = ilTitle.getEditText();
+        rdFinish = findViewById(R.id.book_rdFinish);
+        rdStarted = findViewById(R.id.book_rdStarted);
         uri = Uri.parse("");
 
         rtBar = findViewById(R.id.book_ratingBar);
@@ -107,19 +115,306 @@ public class ManageBooks extends AppCompatActivity {
 
         interfaceFireBase = getMethodInterface();
 
+        setListenerDialog();
+        setListenerFoto();
+        setListenerFechIni();
+        setListenerFechFin();
+        setListenerCreateBook();
+        setListenerFavorite();
+
+        getBookToEdit();
+    }
+
+    /***********************************************
+     ******************** DIALOG *******************
+     *************************************************/
+
+    private void showDialog(){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_author, null);
+        dialogBuilder.setView(dialogView);
+
+        final AlertDialog alertDialog = dialogBuilder.create();
+
+        Button negative = dialogView.findViewById(R.id.negative);
+        Button positive = dialogView.findViewById(R.id.positive);
+        final TextInputLayout tilCreateAuthor = dialogView.findViewById(R.id.tilCreateAuthor);
+        alertDialog.show();
+
+        negative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        positive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText edAuthor = tilCreateAuthor.getEditText();
+                if(edAuthor.getText().toString().isEmpty()){
+                    tilCreateAuthor.setError(getString(R.string.not_empty));
+                }else {
+                    progressDialog.show();
+                    Author author = new Author(edAuthor.getText().toString());
+                    createAuthor.create(author);
+                    alertDialog.dismiss();
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == READ_REQUEST_CODE && resultCode == RESULT_OK){
+            if (data != null) {
+                uri = data.getData();
+                Picasso.with(this).load(uri).into(iVPhoto);
+            }
+        }
+    }
+
+    /***********************************************
+    ******************** CHEKERS *******************
+    *************************************************/
+
+    private  boolean checkNotEmptyText(TextInputLayout element){
+        boolean correct=true;
+        element.setError(null);
+        if(element. getEditText().getText().toString().isEmpty()){
+            element.setError(getString(R.string.not_empty));
+            correct=false;
+        }
+        return correct;
+    }
+
+    private boolean checkRadios(){
+        boolean correct=false;
+        switch (rdGroup.getCheckedRadioButtonId()){
+            case R.id.book_rdStarted:
+                if(checkNotEmptyText(ilFechIni)) {
+                    correct = true;
+                }
+                break;
+            case R.id.book_rdFinish:
+                if(checkNotEmptyText(ilFechIni) && checkNotEmptyText(ilFechFin) && compareDates(fechIni, fechFin)){
+                    correct=true;
+                }
+                break;
+            default:
+                correct=true;
+        }
+        return correct;
+    }
+
+    private boolean compareDates(DateCustom fechIni, DateCustom fechFin) {
+        boolean correct = true;
+        ilFechFin.setError(null);
+        if (Integer.parseInt(fechIni.getYear()) > Integer.parseInt(fechFin.getYear())) {
+            correct = false;
+            ilFechFin.setError(getString(R.string.fechFinishLess));
+        }else if (Integer.parseInt(fechIni.getYear()) == Integer.parseInt(fechFin.getYear())) {
+            if (Integer.parseInt(fechIni.getMonth()) > Integer.parseInt(fechFin.getMonth())) {
+                correct = false;
+                ilFechFin.setError(getString(R.string.fechFinishLess));
+            }else if (Integer.parseInt(fechIni.getMonth()) == Integer.parseInt(fechFin.getMonth())) {
+                if (Integer.parseInt(fechIni.getDay()) > Integer.parseInt(fechFin.getDay())) {
+                    correct = false;
+                    ilFechFin.setError(getString(R.string.fechFinishLess));
+                }
+            }
+
+        }
+
+        return correct;
+    }
+
+    /***********************************************
+     ************** LISTENER AND ADAPTER *************
+     *************************************************/
+
+    private void setListenerFavorite(){
+        ivFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(favorite==false){
+                    ivFavorite.setImageResource(android.R.drawable.btn_star_big_on);
+                    favorite=true;
+                }
+                else{
+                    ivFavorite.setImageResource(android.R.drawable.btn_star_big_off);
+                    favorite=false;
+                }
+
+            }
+        });
+    }
+
+    private void setListenerFechIni() {
+        etFechIni.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fechClick(ManageBooks.this, etFechIni);
+            }
+        });
+    }
+
+    private void setListenerFechFin() {
+        etFechFin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fechClick(ManageBooks.this, etFechFin);
+            }
+        });
+    }
+
+    private void addAdapterSpinner(){
+        sp = findViewById(R.id.book_writter);
+        authorsString = new ArrayList<>();
+        for(Author author : authors){
+            authorsString.add(author.getName());
+        }
+        adaptadorSpiner = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, authorsString);
+        sp.setAdapter(adaptadorSpiner);
+    }
+
+    private void setListenerFoto() {
+        iVPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, READ_REQUEST_CODE);
+            }
+        });
+    }
+
+    private void setListenerCreateBook() {
+        btCreateBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                title = etTitle.getText().toString();
+
+                fechIni = new DateCustom().setDate(etFechIni.getText().toString(), "d-m-y", getString(R.string.barra));
+                fechFin = new DateCustom().setDate(etFechFin.getText().toString(), "d-m-y", getString(R.string.barra));
+
+                resume=summary.getText().toString();
+                rating=rtBar.getRating();
+
+                for(Author author: authors){
+                    if(author.getName() == sp.getSelectedItem().toString()){
+                        authorSelected = author;
+                        break;
+                    }
+                }
+
+                if (checkNotEmptyText(ilTitle) && checkRadios()) {
+                    if (uri != null) {
+                        FirebaseCustom.sendPhoto(uri, interfaceFireBase);
+                    } else {
+                        FirebaseCustom.getPhoto(null, interfaceFireBase);
+                    }
+                }
+
+            }
+        });
+    }
+
+    private void setListenerDialog(){
         btAddAutor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
             }
         });
-
-        setListenerFoto();
-        setListenerFechIni();
-        setListenerFechFin();
-        setListenerBook();
-        setListenerFavorite();
     }
+
+    /***********************************************
+     ****************** DATEPICKER *****************
+     *************************************************/
+
+    private void fechClick(Context context, final EditText editText) {
+        DatePickerDialog recogerFecha = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                //Esta variable lo que realiza es aumentar en uno el mes ya que comienza desde 0 = enero
+                final int actualMonth = month + 1;
+                //Formateo el día obtenido: antepone el 0 si son menores de 10
+                String reformatDay = (dayOfMonth < 10) ? getString(R.string.cero) + String.valueOf(dayOfMonth) : String.valueOf(dayOfMonth);
+                //Formateo el mes obtenido: antepone el 0 si son menores de 10
+                String reformatMonth = (actualMonth < 10) ? getString(R.string.cero) + String.valueOf(actualMonth) : String.valueOf(actualMonth);
+                //Muestro la fecha con el formato deseado
+                editText.setText(reformatDay + getString(R.string.barra) + reformatMonth + getString(R.string.barra) + year);
+            }
+        }, anio, mes, dia);
+        recogerFecha.show();
+    }
+
+    /***********************************************
+     ************** GET AND SET VALUES *************
+     *************************************************/
+
+    private void getAuthors(){
+        authors = manager.getAllAuthor(null);
+    }
+
+    private void addItemToSpinner(Author author){
+        authors.add(author);
+        authorsString.add(author.getName());
+        adaptadorSpiner.notifyDataSetChanged();
+    }
+
+    private void createBook(String photo){
+        if(authorSelected == null){
+            CharSequence mensaje = getString(R.string.not_author);
+            Context context = getApplicationContext();
+            int duration = Toast.LENGTH_SHORT;
+            Toast.makeText(context, mensaje, duration).show();
+        }else {
+            Book book = new Book(0, authorSelected.getId(), "", title, photo, resume, rating, favorite, fechIni, fechFin);
+            Intent intent = new Intent();
+            intent.putExtra("book", book);
+            setResult(RESULT_OK, intent);
+            finish();
+        }
+    }
+
+    private void getBookToEdit(){
+        Intent intent = getIntent();
+        bookEdit = intent.getParcelableExtra("book");
+    }
+
+    private void setBookValues(){
+
+        if(bookEdit.isFavorite()) {
+            ivFavorite.setImageResource(android.R.drawable.btn_star_big_on);
+            favorite=true;
+        }else{
+            ivFavorite.setImageResource(android.R.drawable.btn_star_big_off);
+            favorite=false;
+        }
+        ilFechFin.getEditText().setText(bookEdit.getStartDate().getDate());
+        ilFechIni.getEditText().setText(bookEdit.getEndDate().getDate());
+        ilTitle.getEditText().setText(bookEdit.getTitle());
+        rtBar.setRating(bookEdit.getAssessment());
+        summary.setText(bookEdit.getResume());
+        Picasso.with(this).load(bookEdit.getUrlPhoto()).into(iVPhoto);
+
+        //Empezado y terminado
+        if(!bookEdit.getStartDate().getDate().isEmpty() && !bookEdit.getEndDate().getDate().isEmpty()){
+            rdFinish.setChecked(true);
+        }else{
+            //Empezado pero no acabado
+            if(!bookEdit.getStartDate().getDate().isEmpty() && bookEdit.getEndDate().getDate().isEmpty()){
+                rdStarted.setChecked(true);
+            }
+        }
+    }
+
+    /***********************************************
+     ************** INTERFACES METHODS *************
+     *************************************************/
 
     private InterfaceFireBase getMethodInterface() {
         return new InterfaceFireBase() {
@@ -162,53 +457,6 @@ public class ManageBooks extends AppCompatActivity {
         };
     }
 
-    private void setListenerFoto() {
-        iVPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, READ_REQUEST_CODE);
-            }
-        });
-    }
-
-    private void showDialog(){
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = this.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.dialog_author, null);
-        dialogBuilder.setView(dialogView);
-
-        final AlertDialog alertDialog = dialogBuilder.create();
-
-        Button negative = dialogView.findViewById(R.id.negative);
-        Button positive = dialogView.findViewById(R.id.positive);
-        final TextInputLayout tilCreateAuthor = dialogView.findViewById(R.id.tilCreateAuthor);
-        alertDialog.show();
-
-        negative.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-            }
-        });
-
-        positive.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText edAuthor = tilCreateAuthor.getEditText();
-                if(edAuthor.getText().toString().isEmpty()){
-                    tilCreateAuthor.setError(getString(R.string.not_empty));
-                }else {
-                    progressDialog.show();
-                    Author author = new Author(edAuthor.getText().toString());
-                    createAuthor.create(author);
-                    alertDialog.dismiss();
-                }
-            }
-        });
-    }
-
     private CreateAuthor methodInterface(){
         return new CreateAuthor() {
             @Override
@@ -223,183 +471,5 @@ public class ManageBooks extends AppCompatActivity {
         };
     }
 
-    private void setListenerBook() {
-        btCreateBook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                title = etTitle.getText().toString();
-
-                fechIni = new DateCustom().setDate(etFechIni.getText().toString(), "d-m-y", getString(R.string.barra));
-                fechFin = new DateCustom().setDate(etFechFin.getText().toString(), "d-m-y", getString(R.string.barra));
-
-                resume=summary.getText().toString();
-                rating=rtBar.getRating();
-
-                for(Author author: authors){
-                    if(author.getName() == sp.getSelectedItem().toString()){
-                        authorSelected = author;
-                        break;
-                    }
-                }
-
-                if (checkNotEmptyText(ilTitle) && checkRadios()) {
-                    if (uri != null) {
-                        FirebaseCustom.sendPhoto(uri, interfaceFireBase);
-                    } else {
-                        FirebaseCustom.getPhoto(null, interfaceFireBase);
-                    }
-                }
-
-            }
-        });
-    }
-
-    private  boolean checkNotEmptyText(TextInputLayout element){
-        boolean correct=true;
-        element.setError(null);
-        if(element. getEditText().getText().toString().isEmpty()){
-            element.setError(getString(R.string.not_empty));
-            correct=false;
-        }
-        return correct;
-    }
-
-    private boolean checkRadios(){
-        boolean correct=false;
-        switch (rdGroup.getCheckedRadioButtonId()){
-            case R.id.book_rdStarted:
-                if(checkNotEmptyText(ilFechIni)) {
-                    correct = true;
-                }
-                break;
-            case R.id.book_rdFinish:
-                if(checkNotEmptyText(ilFechIni) && checkNotEmptyText(ilFechFin) && compareDates(fechIni, fechFin)){
-                    correct=true;
-                }
-                break;
-            default:
-                correct=true;
-        }
-        return correct;
-    }
-
-    private void fechClick(Context context, final EditText editText) {
-        DatePickerDialog recogerFecha = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                //Esta variable lo que realiza es aumentar en uno el mes ya que comienza desde 0 = enero
-                final int actualMonth = month + 1;
-                //Formateo el día obtenido: antepone el 0 si son menores de 10
-                String reformatDay = (dayOfMonth < 10) ? getString(R.string.cero) + String.valueOf(dayOfMonth) : String.valueOf(dayOfMonth);
-                //Formateo el mes obtenido: antepone el 0 si son menores de 10
-                String reformatMonth = (actualMonth < 10) ? getString(R.string.cero) + String.valueOf(actualMonth) : String.valueOf(actualMonth);
-                //Muestro la fecha con el formato deseado
-                editText.setText(reformatDay + getString(R.string.barra) + reformatMonth + getString(R.string.barra) + year);
-            }
-        }, anio, mes, dia);
-        recogerFecha.show();
-    }
-
-    private void setListenerFechIni() {
-        etFechIni.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fechClick(ManageBooks.this, etFechIni);
-            }
-        });
-    }
-
-    private void setListenerFechFin() {
-        etFechFin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fechClick(ManageBooks.this, etFechFin);
-            }
-        });
-    }
-
-    private void getAuthors(){
-        authors = manager.getAllAuthor(null);
-    }
-
-    private void addAdapterSpinner(){
-        sp = findViewById(R.id.book_writter);
-        authorsString = new ArrayList<>();
-        for(Author author : authors){
-            authorsString.add(author.getName());
-        }
-        adaptadorSpiner = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, authorsString);
-        sp.setAdapter(adaptadorSpiner);
-    }
-
-    private void addItemToSpinner(Author author){
-        authors.add(author);
-        authorsString.add(author.getName());
-        adaptadorSpiner.notifyDataSetChanged();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == READ_REQUEST_CODE && resultCode == RESULT_OK){
-            if (data != null) {
-                uri = data.getData();
-                Picasso.with(this).load(uri).into(iVPhoto);
-            }
-        }
-    }
-
-    private void createBook(String photo){
-        if(authorSelected == null){
-            CharSequence mensaje = getString(R.string.not_author);
-            Context context = getApplicationContext();
-            int duration = Toast.LENGTH_SHORT;
-            Toast.makeText(context, mensaje, duration).show();
-        }else {
-            Book book = new Book(0, authorSelected.getId(), "", title, photo, resume, rating, favorite, fechIni, fechFin);
-            Intent intent = new Intent();
-            intent.putExtra("book", book);
-            setResult(RESULT_OK, intent);
-            finish();
-        }
-    }
-
-    private void setListenerFavorite(){
-        ivFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(favorite==false){
-                    ivFavorite.setImageResource(android.R.drawable.btn_star_big_on);
-                    favorite=true;
-                }
-                else{
-                    ivFavorite.setImageResource(android.R.drawable.btn_star_big_off);
-                    favorite=false;
-                }
-
-            }
-        });
-    }
-
-    private boolean compareDates(DateCustom fechIni, DateCustom fechFin) {
-        boolean correct = true;
-        ilFechFin.setError(null);
-        if (Integer.parseInt(fechIni.getYear()) > Integer.parseInt(fechFin.getYear())) {
-            correct = false;
-            ilFechFin.setError(getString(R.string.fechFinishLess));
-        }else if (Integer.parseInt(fechIni.getYear()) == Integer.parseInt(fechFin.getYear())) {
-            if (Integer.parseInt(fechIni.getMonth()) > Integer.parseInt(fechFin.getMonth())) {
-                correct = false;
-                ilFechFin.setError(getString(R.string.fechFinishLess));
-            }else if (Integer.parseInt(fechIni.getMonth()) == Integer.parseInt(fechFin.getMonth())) {
-                if (Integer.parseInt(fechIni.getDay()) > Integer.parseInt(fechFin.getDay())) {
-                    correct = false;
-                    ilFechFin.setError(getString(R.string.fechFinishLess));
-                }
-            }
-
-        }
-
-        return correct;
-    }
 
 }

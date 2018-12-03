@@ -2,10 +2,15 @@ package org.izv.aad.proyecto.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,7 +24,7 @@ import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
 import org.izv.aad.proyecto.R;
 
-public class ShowBook extends AppCompatActivity {
+public class ShowBook extends AppCompatActivity{
 
     private TextView show_author, show_dateStart, show_dateFinish, show_state;
     private EditText show_status;
@@ -29,6 +34,8 @@ public class ShowBook extends AppCompatActivity {
     private RatingBar show_rating;
     private String status_book, dateStart, dateEnd;
 
+    private  final int EDITBOOK=1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +43,12 @@ public class ShowBook extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         init();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.drawer_layout_show_book, menu);
+        return true;
     }
 
     private void init(){
@@ -48,6 +61,7 @@ public class ShowBook extends AppCompatActivity {
         show_rating = findViewById(R.id.show_rating);
         show_logo = findViewById(R.id.show_logo);
         show_favStar = findViewById(R.id.show_favStar);
+        notEditableRatingBar();
         setValues();
     }
 
@@ -95,4 +109,19 @@ public class ShowBook extends AppCompatActivity {
             }
         }
     }
+
+    /*
+    * NO EDITABLE RATINGBAR
+    * */
+
+    private void notEditableRatingBar(){
+        show_rating.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+    }
+
+
 }

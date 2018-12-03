@@ -165,19 +165,22 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_createBook) {
+            Intent manageBooks = new Intent(Index.this, ManageBooks.class);
+            startActivityForResult(manageBooks, CODE_RESULT_MANAGEBOOKS_CREATE);
+        } else if (id == R.id.nav_AuthorList) {
 
-        } else if (id == R.id.sign_out) {
+        } else if (id == R.id.nav_signout) {
             removeSharedPreferences();
             removeBD();
             finish();
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_settings) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_help) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_darkmode) {
 
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
