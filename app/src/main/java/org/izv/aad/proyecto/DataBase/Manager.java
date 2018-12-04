@@ -73,7 +73,7 @@ public class Manager {
      ********************   UPDATE  ******************
      *************************************************/
 
-    public int updateLibro(Book book){
+    public int updateBook(Book book){
         String condicion = Contract.BookTable._ID + " = ?";
         String[] argumentos = { book.getId() + "" };
         return bdBook.update(Contract.BookTable.TABLE_NAME, Contract.contentValuesBook(book), condicion, argumentos);

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -123,6 +124,9 @@ public class ManageBooks extends AppCompatActivity {
         setListenerFavorite();
 
         getBookToEdit();
+        if(bookEdit != null) {
+            setBookValues();
+        }
     }
 
     /***********************************************
@@ -296,8 +300,8 @@ public class ManageBooks extends AppCompatActivity {
             public void onClick(View v) {
                 title = etTitle.getText().toString();
 
-                fechIni = new DateCustom().setDate(etFechIni.getText().toString(), "d-m-y", getString(R.string.barra));
-                fechFin = new DateCustom().setDate(etFechFin.getText().toString(), "d-m-y", getString(R.string.barra));
+                fechIni = new DateCustom().setDate(etFechIni.getText().toString(), "d-m-y", getString(R.string.guion));
+                fechFin = new DateCustom().setDate(etFechFin.getText().toString(), "d-m-y", getString(R.string.guion));
 
                 resume=summary.getText().toString();
                 rating=rtBar.getRating();
@@ -345,7 +349,7 @@ public class ManageBooks extends AppCompatActivity {
                 //Formateo el mes obtenido: antepone el 0 si son menores de 10
                 String reformatMonth = (actualMonth < 10) ? getString(R.string.cero) + String.valueOf(actualMonth) : String.valueOf(actualMonth);
                 //Muestro la fecha con el formato deseado
-                editText.setText(reformatDay + getString(R.string.barra) + reformatMonth + getString(R.string.barra) + year);
+                editText.setText(reformatDay + getString(R.string.guion) + reformatMonth + getString(R.string.guion) + year);
             }
         }, anio, mes, dia);
         recogerFecha.show();
@@ -380,13 +384,26 @@ public class ManageBooks extends AppCompatActivity {
         }
     }
 
+    private void editBook(){
+        bookEdit.setIdAuthor(authorSelected.getId());
+        bookEdit.setTitle(title);
+        bookEdit.setResume(resume);
+        bookEdit.setAssessment(rating);
+        bookEdit.setFavorite(favorite);
+        bookEdit.setStartDate(fechIni);
+        bookEdit.setEndDate(fechFin);
+        Intent i = new Intent();
+        i.putExtra("book", bookEdit);
+        setResult(RESULT_OK, i);
+        finish();
+    }
+
     private void getBookToEdit(){
         Intent intent = getIntent();
         bookEdit = intent.getParcelableExtra("book");
     }
 
     private void setBookValues(){
-
         if(bookEdit.isFavorite()) {
             ivFavorite.setImageResource(android.R.drawable.btn_star_big_on);
             favorite=true;
@@ -394,15 +411,20 @@ public class ManageBooks extends AppCompatActivity {
             ivFavorite.setImageResource(android.R.drawable.btn_star_big_off);
             favorite=false;
         }
-        ilFechFin.getEditText().setText(bookEdit.getStartDate().getDate());
-        ilFechIni.getEditText().setText(bookEdit.getEndDate().getDate());
+        if(!bookEdit.getStartDate().getDate().equals("00-00-00")){
+            ilFechIni.getEditText().setText(bookEdit.getStartDate().getDate());
+        }
+        if(!bookEdit.getEndDate().getDate().equals("00-00-00")){
+            ilFechFin.getEditText().setText(bookEdit.getEndDate().getDate());
+        }
         ilTitle.getEditText().setText(bookEdit.getTitle());
         rtBar.setRating(bookEdit.getAssessment());
         summary.setText(bookEdit.getResume());
         Picasso.with(this).load(bookEdit.getUrlPhoto()).into(iVPhoto);
 
         //Empezado y terminado
-        if(!bookEdit.getStartDate().getDate().isEmpty() && !bookEdit.getEndDate().getDate().isEmpty()){
+        if(!ilFechFin.getEditText().getText().toString().isEmpty()
+                && !ilFechIni.getEditText().getText().toString().isEmpty()){
             rdFinish.setChecked(true);
         }else{
             //Empezado pero no acabado
@@ -410,6 +432,8 @@ public class ManageBooks extends AppCompatActivity {
                 rdStarted.setChecked(true);
             }
         }
+
+        btCreateBook.setText(getString(R.string.editBook));
     }
 
     /***********************************************
@@ -441,17 +465,25 @@ public class ManageBooks extends AppCompatActivity {
 
             @Override
             public String sendRoutePhoto(String string) {
-                if(string != null && !string.equals("null")) {
+
+                if (string != null && !string.equals("null")) {
                     FirebaseCustom.getPhoto(string, interfaceFireBase);
-                }else{
+                } else {
                     FirebaseCustom.getPhoto(null, interfaceFireBase);
                 }
+
                 return null;
             }
 
             @Override
             public String getRoutePhoto(String string) {
-                createBook(string);
+                if(bookEdit != null){
+                    bookEdit.setUrlPhoto(string);
+                    Log.v("TAGXYZ", string.toString());
+                    editBook();
+                }else {
+                    createBook(string);
+                }
                 return string;
             }
         };

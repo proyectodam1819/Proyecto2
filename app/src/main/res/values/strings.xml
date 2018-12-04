@@ -144,8 +144,9 @@
     <string name="rating">Rating</string>
     <string name="not_author">You must select an author</string>
     <string name="fechFinishLess">The finish date is smaller than the start date</string>
+    <string name="guion">-</string>
 
-    //Logup
+    <!-- Logup -->
     <string name="error_email_repeat">com.google.firebase.auth.FirebaseAuthUserCollisionException: The email address is already in use by another account.</string>
     <string name="msg_email_repeat">The email address is already in use by another account.</string>
 
@@ -174,5 +175,6 @@
 
     <!-- DrawerLayout SHOW BOOK -->
     <string name="editBook">Edit Book</string>
+
 
 </resources>

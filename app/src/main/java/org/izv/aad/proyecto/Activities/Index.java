@@ -2,7 +2,6 @@ package org.izv.aad.proyecto.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +9,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -39,8 +37,6 @@ import org.izv.aad.proyecto.Utils.Gravatar;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.System.exit;
 
 public class Index extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Toolbar toolbar;
@@ -290,7 +286,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         Long id = manager.insertLibro(book);
         book.setId(id);
         book = FirebaseCustom.saveBook(book);
-        manager.updateLibro(book);
+        manager.updateBook(book);
     }
 
     /**********************************************************

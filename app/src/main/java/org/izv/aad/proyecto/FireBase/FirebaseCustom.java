@@ -253,6 +253,7 @@ public class FirebaseCustom {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
+                Log.v("XYZ_FIREBASE", exception.getMessage());
                 interfaceFireBase.getRoutePhoto(null);
             }
         });

@@ -2,10 +2,7 @@ package org.izv.aad.proyecto.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -34,7 +31,9 @@ public class ShowBook extends AppCompatActivity{
     private RatingBar show_rating;
     private String status_book, dateStart, dateEnd;
 
-    private  final int EDITBOOK=1;
+    private Manager manager;
+
+    private static final int VALUE_EDIT_BOOK = 109;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +48,24 @@ public class ShowBook extends AppCompatActivity{
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.drawer_layout_show_book, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.editBook) {
+            Intent intent = new Intent(this, ManageBooks.class);
+            intent.putExtra("book", book);
+            startActivityForResult(intent, VALUE_EDIT_BOOK);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void init(){
@@ -123,5 +140,14 @@ public class ShowBook extends AppCompatActivity{
         });
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(resultCode == RESULT_OK && requestCode == VALUE_EDIT_BOOK){
+            manager = new Manager(this);
+            book = data.getParcelableExtra("book");
+            manager.updateBook(book);
+            checkDates();
+            setValues();
+        }
+    }
 }
