@@ -478,8 +478,14 @@ public class ManageBooks extends AppCompatActivity {
             @Override
             public String getRoutePhoto(String string) {
                 if(bookEdit != null){
-                    bookEdit.setUrlPhoto(string);
-                    Log.v("TAGXYZ", string.toString());
+                    //Si la foto que tiene asignada el objeto y la del imageView son distintas,
+                    //se actualiza la imágen del objeto
+
+                    Log.v("XYZ_TAG", bookEdit.getUrlPhoto());
+                    Log.v("XYZ_TAG", uri.toString() + " --- algo");
+                    if(!bookEdit.getUrlPhoto().equals(uri.toString()) && uri != null){
+                        bookEdit.setUrlPhoto(string);
+                    }
                     editBook();
                 }else {
                     createBook(string);
