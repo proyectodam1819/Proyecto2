@@ -38,8 +38,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="org.izv.aad.proyecto.Activities.ManageBooks" >
-        </activity>
+        <activity android:name="org.izv.aad.proyecto.Activities.ManageBooks" />
         <activity
             android:name="org.izv.aad.proyecto.Activities.ShowBook"
             android:label="@string/title_activity_mostrar_libro"

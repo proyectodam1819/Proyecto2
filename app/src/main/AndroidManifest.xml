@@ -19,6 +19,7 @@
             android:name=".Activities.Index"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
         <activity android:name=".Activities.Login" >
             <intent-filter>
@@ -28,8 +29,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Activities.ManageBooks">
-        </activity>
+        <activity android:name=".Activities.ManageBooks"/>
 
         <activity
             android:name=".Activities.ShowBook"

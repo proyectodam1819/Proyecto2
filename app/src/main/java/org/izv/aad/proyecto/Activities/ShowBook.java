@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import org.izv.aad.proyecto.DataBase.Manager;
+import org.izv.aad.proyecto.FireBase.FirebaseCustom;
 import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
 import org.izv.aad.proyecto.R;
@@ -146,8 +147,10 @@ public class ShowBook extends AppCompatActivity{
             manager = new Manager(this);
             book = data.getParcelableExtra("book");
             manager.updateBook(book);
+            FirebaseCustom.updateBook(book);
             checkDates();
             setValues();
         }
     }
+
 }
