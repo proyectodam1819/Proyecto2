@@ -225,4 +225,9 @@ public class Manager {
         authorHelper.dropTable(bdAuthor);
         bookHelper.dropTable(bdBook);
     }
+
+    public void createTables(){
+        bookHelper.onCreate(bdBook);
+        authorHelper.onCreate(bdAuthor);
+    }
 }

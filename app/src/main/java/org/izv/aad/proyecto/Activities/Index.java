@@ -43,7 +43,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     private RecyclerView recyclerBooks;
     private List<Book> books;
     private Manager manager;
-    private TextView msg_error_index;
+    private TextView msg_error_index, userEmailTV;
     private InterfaceFireBase interfaceFireBase;
     private ImageView index_imageUser;
     private AdapterIndex adapterIndex;
@@ -99,6 +99,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
 
         View headerView = navigationView.getHeaderView(0);
         index_imageUser = headerView.findViewById(R.id.index_imageUser);
+        userEmailTV=headerView.findViewById(R.id.userEmailTV);
     }
 
     private void initRecycler(){
@@ -170,7 +171,10 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
 
         } else if (id == R.id.nav_signout) {
             removeSharedPreferences();
-            removeBD();
+            //Se borran las tablas y sus datos
+            manager.dropTables();
+            //Se crean las tablas vacías
+            manager.createTables();
             finish();
         } else if (id == R.id.nav_settings) {
 
@@ -191,12 +195,14 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     private void getEmailSharedPreferences(){
         SharedPreferences pref = getSharedPreferences(Login.EMAIL, MODE_PRIVATE);
         String email = pref.getString("email", null);
+
+        userEmailTV.setText(email);
+
         String imageUrl = null;
         if(email != null) {
             imageUrl = Gravatar.codeGravatarImage(email);
         }
         setGravatar(imageUrl);
-
     }
 
     private void setGravatar(String imageUrl){
@@ -232,10 +238,6 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         }
     }
 
-    private void removeBD(){
-        manager.dropTables();
-    }
-
     private void updateBooksFromFirebase(){
         FirebaseCustom.getAllBooks(interfaceFireBase);
     }
@@ -263,11 +265,17 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
             }
 
             @Override
-            public List<Book> getAllBooks(List<Book> books) {
-                for(Book book : books){
-                    //saveBooks(book);
+            public List<Book> getAllBooks(List<Book> booksInterface) {
+                for(Book book : booksInterface){
+                    saveBooks(book, true);
                 }
-                return books;
+                books = booksInterface;
+                if(adapterIndex == null) {
+                    initRecycler();
+                }
+                adapterIndex.notifyDataSetChanged();
+                checkRecyclerBooks();
+                return booksInterface;
             }
 
             @Override
@@ -282,11 +290,14 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         };
     }
 
-    private void saveBooks(Book book){
+    private void saveBooks(Book book, boolean getFromFirebase){
         Long id = manager.insertLibro(book);
-        book.setId(id);
-        book = FirebaseCustom.saveBook(book);
-        manager.updateBook(book);
+
+        if(!getFromFirebase){
+            book.setId(id);
+            book = FirebaseCustom.saveBook(book);
+            manager.updateBook(book);
+        }
     }
 
     /**********************************************************
@@ -321,7 +332,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         if(resultCode == RESULT_OK && requestCode == CODE_RESULT_MANAGEBOOKS_CREATE){
             Book book = data.getParcelableExtra("book");
             books.add(book);
-            saveBooks(book);
+            saveBooks(book, false);
             if(adapterIndex == null) {
                 initRecycler();
             }
