@@ -3,14 +3,11 @@ package org.izv.aad.proyecto.DataBase;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
 import org.izv.aad.proyecto.Objects.DateCustom;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +16,6 @@ public class Manager {
     private AuthorHelper authorHelper;
     private BookHelper bookHelper;
     private SQLiteDatabase bdBook, bdAuthor;
-    DateCustom dateCustom;
 
     public Manager(Context context){
         this.authorHelper = new AuthorHelper(context);
@@ -187,7 +183,6 @@ public class Manager {
             author = getRowAutor(cursor);
         }
         return author;
-
     }
 
     public List<Book> getAllBooks(){
@@ -215,6 +210,18 @@ public class Manager {
             authors.add(author);
         }
         return authors;
+    }
+
+    public List<Book> getFilterBooks(String title){
+        List<Book> books = new ArrayList<>();
+        String condicion = Contract.BookTable.COLUMN_TITLE + " like ?";
+        String[] argumentos = { "%" + title + "%" };
+        Cursor cursor = getCursorBook(condicion, argumentos);
+
+        while(cursor.moveToNext()){
+            books.add(getRowBook(cursor));
+        }
+        return books;
     }
 
     /*************************************************

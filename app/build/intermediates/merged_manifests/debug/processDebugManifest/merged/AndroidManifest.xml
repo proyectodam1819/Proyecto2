@@ -43,8 +43,9 @@
             android:name="org.izv.aad.proyecto.Activities.ShowBook"
             android:label="@string/title_activity_mostrar_libro"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="org.izv.aad.proyecto.Activities.Help" />
-        <activity android:name="org.izv.aad.proyecto.Activities.CreateUser" />
+        <activity
+            android:name="org.izv.aad.proyecto.Activities.Help"
+            android:parentActivityName="org.izv.aad.proyecto.Activities.Index" />
         <activity android:name="org.izv.aad.proyecto.Activities.Logup" />
         <activity
             android:name="com.google.firebase.auth.internal.FederatedSignInActivity"

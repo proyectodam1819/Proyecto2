@@ -2,9 +2,7 @@ package org.izv.aad.proyecto.FireBase;
 
 import android.app.Activity;
 import android.net.Uri;
-import android.os.Environment;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,7 +25,6 @@ import org.izv.aad.proyecto.Interfaces.InterfaceFireBase;
 import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
 
-import java.io.File;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -220,6 +217,31 @@ public class FirebaseCustom {
         });
     }
 
+    public static void getAllAuthors(final InterfaceFireBase interfaceFireBase){
+        Query query = getReference().child(getUser().getUid() + "/author/");
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<Author> authors = new ArrayList<>();
+                if(dataSnapshot != null) {
+                    Map<String, Object> items = (Map<String, Object>) dataSnapshot.getValue();
+                    if(items != null) {
+                        for (Map.Entry<String, Object> entry : items.entrySet()) {
+                            Map mapItem = (Map) entry.getValue();
+                            authors.add(Author.fromMap(mapItem));
+                        }
+                    }
+                }
+                interfaceFireBase.getAllAuthors(authors);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     public static void sendPhoto(Uri uri, final InterfaceFireBase interfaceFireBase){
         final String url = getUser().getUid() + "/" + generateRandomText();
         StorageReference image = storage.child(url);
@@ -253,7 +275,6 @@ public class FirebaseCustom {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
-                Log.v("XYZ_FIREBASE", exception.getMessage());
                 interfaceFireBase.getRoutePhoto(null);
             }
         });

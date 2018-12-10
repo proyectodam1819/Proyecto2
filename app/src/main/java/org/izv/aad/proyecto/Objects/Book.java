@@ -2,6 +2,7 @@ package org.izv.aad.proyecto.Objects;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -10,7 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Book implements Parcelable {
+public class Book implements Parcelable, Comparable<Book>{
 
     private long id, idAuthor;
     private String title, urlPhoto, resume, key;
@@ -212,5 +213,10 @@ public class Book implements Parcelable {
         dest.writeByte((byte) (favorite ? 1 : 0));
         dest.writeParcelable(startDate, flags);
         dest.writeParcelable(endDate, flags);
+    }
+
+    @Override
+    public int compareTo(@NonNull Book book) {
+        return this.getTitle().compareTo(book.getTitle());
     }
 }

@@ -176,5 +176,9 @@
     <!-- DrawerLayout SHOW BOOK -->
     <string name="editBook">Edit Book</string>
 
+    <!-- ORDENACION -->
+    <string name="sortAuthor">Sort by author</string>
+    <string name="sortTitle">Sort by title</string>
+
 
 </resources>

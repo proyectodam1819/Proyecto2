@@ -2,13 +2,19 @@ package org.izv.aad.proyecto.Activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,8 +41,10 @@ import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
 import org.izv.aad.proyecto.R;
 import org.izv.aad.proyecto.Utils.Gravatar;
+import org.izv.aad.proyecto.Utils.SortAuthor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Index extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -47,6 +56,9 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     private InterfaceFireBase interfaceFireBase;
     private ImageView index_imageUser;
     private AdapterIndex adapterIndex;
+
+    private ConstraintLayout searcher;
+    private EditText etSearch;
 
     public static int CODE_RESULT_MANAGEBOOKS_CREATE = 100;
 
@@ -65,15 +77,19 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
      **********************************************************/
 
     private void init(){
-
         getInterfacesMethorFirebase();
         updateBooksFromFirebase();
         initFloatingButton();
         initNavigarionDrawer();
         msg_error_index = findViewById(R.id.msg_error_index);
+
+        searcher = findViewById(R.id.searcher);
+        etSearch = findViewById(R.id.etSearch);
+
         manager = new Manager(this);
         books = new ArrayList<>();
         getBooks();
+        SearcherBooks();
     }
 
     private void initFloatingButton(){
@@ -137,7 +153,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.index, menu);
+        getMenuInflater().inflate(R.menu.index_toolbar_menu, menu);
         return true;
     }
 
@@ -145,9 +161,38 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.search) {
+            if(searcher.getVisibility() == View.GONE) {
+                searcher.setVisibility(View.VISIBLE);
+
+                item.setIcon(getResources().getDrawable(R.drawable.ic_close));
+            }else{
+                searcher.setVisibility(View.GONE);
+                item.setIcon(getResources().getDrawable(R.drawable.ic_search));
+            }
+
             return true;
         }
+        if(id == R.id.sortTitle){
+            books.sort(null);
+            //Collections.sort(books, null);
+            adapterIndex.notifyDataSetChanged();
+            return true;
+        }
+
+        if(id == R.id.sortIdAuthor){
+            books.sort(new SortAuthor(manager));
+            //Collections.sort(books, new SortAuthor(manager));
+            adapterIndex.notifyDataSetChanged();
+            return true;
+        }
+
+        if(id == R.id.createBookMenu){
+            Intent i = new Intent(Index.this,ManageBooks.class);
+            startActivityForResult(i,CODE_RESULT_MANAGEBOOKS_CREATE);
+            return true;
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -179,6 +224,8 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_help) {
+            Intent intentHelp = new Intent(Index.this, Help.class);
+            startActivity(intentHelp);
 
         } else if (id == R.id.nav_darkmode) {
 
@@ -229,8 +276,8 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     private void checkRecyclerBooks(){
+        msg_error_index.setText(getString(R.string.no_books));
         if(books.size() <= 0){
-            msg_error_index.setText(getString(R.string.no_books));
             msg_error_index.setVisibility(View.VISIBLE);
         }else{
             msg_error_index.setVisibility(View.GONE);
@@ -240,6 +287,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
 
     private void updateBooksFromFirebase(){
         FirebaseCustom.getAllBooks(interfaceFireBase);
+        FirebaseCustom.getAllAuthors(interfaceFireBase);
     }
 
     private void getInterfacesMethorFirebase(){
@@ -276,6 +324,16 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
                 adapterIndex.notifyDataSetChanged();
                 checkRecyclerBooks();
                 return booksInterface;
+            }
+
+            @Override
+            public List<Author> getAllAuthors(List<Author> authors) {
+
+                for(Author author : authors){
+                    manager.insertAutor(author);
+                }
+
+                return null;
             }
 
             @Override
@@ -339,5 +397,54 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
             adapterIndex.notifyDataSetChanged();
             checkRecyclerBooks();
         }
+    }
+
+    private void searchBooks(String titleSearch) {
+        //Tiene libros
+        if(manager.getFilterBooks(titleSearch).size() > 0) {
+            books = manager.getFilterBooks(titleSearch);
+            adapterIndex.notifyDataSetChanged();
+            checkRecyclerBooks();
+            //Si existe el mensaje
+            if(msg_error_index.getVisibility() != View.GONE) {
+                msg_error_index.setVisibility(View.GONE);
+            }
+        }
+        //No tiene libros
+        else{
+            final int size = books.size();
+            books.clear();
+            adapterIndex.notifyItemRangeRemoved(0, size);
+
+            msg_error_index.setText(getString(R.string.no_books));
+            msg_error_index.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void SearcherBooks(){
+        //Asociar el escuchador para el teclado de la máquina virtual
+        etSearch.addTextChangedListener(initTextWatcher());
+        etSearch.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                String titleSearch = etSearch.getText().toString();
+                searchBooks(titleSearch);
+
+                return false;
+            }
+        });
+    }
+
+    private TextWatcher initTextWatcher(){
+        return new TextWatcher() {
+            public void afterTextChanged(Editable s) {}
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String titleSearch = etSearch.getText().toString();
+                searchBooks(titleSearch);
+            }
+        };
     }
 }

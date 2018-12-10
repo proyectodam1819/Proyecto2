@@ -2,12 +2,9 @@ package org.izv.aad.proyecto.DataBase;
 
 import android.content.ContentValues;
 import android.provider.BaseColumns;
-import android.util.Log;
 
 import org.izv.aad.proyecto.Objects.Author;
 import org.izv.aad.proyecto.Objects.Book;
-
-import java.util.Date;
 
 public class Contract {
 
@@ -71,7 +68,6 @@ public class Contract {
         cv.put(BookTable.COLUMN_FAVORITE, book.isFavorite());
         cv.put(BookTable.COLUMN_START_DATE, book.getStartDate().toString());
         cv.put(BookTable.COLUMN_END_DATE, book.getEndDate().toString());
-        Log.v("XYZ", cv.toString());
         return cv;
     }
 

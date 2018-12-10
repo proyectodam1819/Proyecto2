@@ -67,6 +67,11 @@ public class AdapterIndex extends RecyclerView.Adapter <AdapterIndex.MyViewHolde
             }
 
             @Override
+            public List<Author> getAllAuthors(List<Author> authors) {
+                return null;
+            }
+
+            @Override
             public String sendRoutePhoto(String string) {
                 return null;
             }
